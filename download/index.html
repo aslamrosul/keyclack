@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Download Mechvibes</title>
+  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
+  <meta property="og:title" content="Download Mechvibes"/>
+  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <meta property="og:image" content="/screens/ss1.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/theme.css"/>
+  <style>
+    /* Smooth interactive typography & ambient highlights */
+    body {
+      background-color: var(--color-base-100, #121316);
+      color: var(--color-base-content, #f4f4f5);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .keyboard-key {
+      transition: all 0.08s ease-in-out;
+      user-select: none;
+    }
+    .keyboard-key:active, .keyboard-key.active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(1.2);
+    }
+    /* Waveform canvas */
+    .waveform-bar {
+      transition: height 0.1s ease;
+    }
+  </style>
+  
+</head>
+<body class="MOT0tq_className antialiased min-h-screen flex flex-col bg-base-100 text-base-content selection:bg-primary/20">
+
+  <!-- Top Sticky Navigation Pill -->
+  <header class="sticky top-4 z-50 w-full px-4">
+    <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
+      <div class="flex shrink-0 items-center">
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
+          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-1">
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/blog">Blog</a>
+        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Interactive Web Sound Trigger Pill -->
+        <button id="webAudioToggle" class="btn btn-xs btn-outline btn-primary rounded-full gap-1.5 px-3">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span id="audioToggleLabel">Sound: ON</span>
+        </button>
+
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/login">Sign In</a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/blog">Blog</a>
+      <div class="divider my-1"></div>
+      <a class="btn btn-sm btn-neutral w-full" href="/login">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="flex-grow">
+    
+  <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto space-y-12">
+      
+      <!-- Header -->
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <div class="badge badge-primary badge-outline text-xs uppercase tracking-wider font-semibold">Latest Release v3.3.0</div>
+        <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-base-content">
+          Download Mechvibes
+        </h1>
+        <p class="text-base text-base-content/70">
+          Get the official release for your operating system. Free, open source, and lightweight.
+        </p>
+      </div>
+
+      <!-- OS Cards Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        
+        <!-- Windows Card -->
+        <div class="bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/50 hover:shadow-2xl transition-all duration-300 group">
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold">Windows</h3>
+              <p class="text-xs text-base-content/60 mt-1">Windows 10 / 11 (64-bit)</p>
+            </div>
+            <ul class="text-xs text-base-content/70 space-y-2">
+              <li class="flex items-center gap-2">✓ Automatic setup installer</li>
+              <li class="flex items-center gap-2">✓ System tray minimization</li>
+              <li class="flex items-center gap-2">✓ Low-level keyboard hook</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3 pt-6 border-t border-base-300/80">
+            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/Mechvibes-3.3.0-Setup-x64.exe" class="btn btn-primary w-full rounded-box gap-2 shadow-lg shadow-primary/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download .exe (x64)
+            </a>
+            <div class="text-[10px] text-center text-base-content/40">File size: ~22 MB</div>
+          </div>
+        </div>
+
+        <!-- macOS Card -->
+        <div class="bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/50 hover:shadow-2xl transition-all duration-300 group">
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-2xl bg-base-content/10 text-base-content flex items-center justify-center">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.78 1.06-1.87.94-2.96-.91.04-2.02.61-2.67 1.39-.58.68-1.09 1.79-.95 2.86 1.01.08 2.05-.51 2.68-1.29z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold">macOS</h3>
+              <p class="text-xs text-base-content/60 mt-1">macOS 12.0+ Monterey or later</p>
+            </div>
+            <ul class="text-xs text-base-content/70 space-y-2">
+              <li class="flex items-center gap-2">✓ Apple Silicon native (M1/M2/M3/M4)</li>
+              <li class="flex items-center gap-2">✓ Menu bar companion integration</li>
+              <li class="flex items-center gap-2">✓ Input monitoring security model</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3 pt-6 border-t border-base-300/80">
+            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-macos-arm64.dmg" class="btn btn-neutral w-full rounded-box gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download .dmg (Apple Silicon)
+            </a>
+            <div class="text-[10px] text-center text-base-content/40">Requires Input Monitoring permission</div>
+          </div>
+        </div>
+
+        <!-- Linux Card (Featured / Highlighted) -->
+        <div class="bg-base-100 rounded-3xl border-2 border-primary/40 p-8 flex flex-col justify-between hover:border-primary hover:shadow-2xl transition-all duration-300 relative group">
+          <div class="absolute -top-3 right-6 badge badge-primary text-[10px] font-bold">Active Platform</div>
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 0-4 4v5.38A5.99 5.99 0 0 0 5 17c0 2.21 3.13 4 7 4s7-1.79 7-4a5.99 5.99 0 0 0-3-5.62V6a4 4 0 0 0-4-4zm-2 5a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold">Linux</h3>
+              <p class="text-xs text-base-content/60 mt-1">Ubuntu, Debian, Fedora, Arch, Nix</p>
+            </div>
+            <ul class="text-xs text-base-content/70 space-y-2">
+              <li class="flex items-center gap-2">✓ Standalone universal AppImage</li>
+              <li class="flex items-center gap-2">✓ Debian / Ubuntu .deb package</li>
+              <li class="flex items-center gap-2">✓ Wayland & X11 evdev low latency</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3 pt-6 border-t border-base-300/80">
+            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-x86_64.AppImage" class="btn btn-primary w-full rounded-box gap-2 shadow-lg shadow-primary/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download .AppImage
+            </a>
+            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes_3.3.0_amd64.deb" class="btn btn-ghost btn-sm w-full rounded-box text-xs">
+              Download .deb package
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Verification Checksums Table -->
+      <div class="bg-base-200/50 rounded-3xl border border-base-300 p-6 sm:p-8 space-y-4">
+        <h3 class="text-lg font-bold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Release Verification Checksums (SHA-256)
+        </h3>
+        
+        <div class="overflow-x-auto">
+          <table class="table table-xs font-mono w-full">
+            <thead>
+              <tr class="text-base-content/60">
+                <th>Artifact</th>
+                <th>SHA-256 Hash</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold text-base-content">mechvibes-3.3.0-x86_64.AppImage</td>
+                <td class="text-base-content/70 select-all">ef655b05ac26feebfd3bc24ec7ccb30389cefc332152862c95e5b3ee28e83120</td>
+              </tr>
+              <tr>
+                <td class="font-bold text-base-content">Mechvibes-3.3.0-Setup-x64.exe</td>
+                <td class="text-base-content/70 select-all">4a9192e2dc629cbe1ff893d56ef17b44781cae9365287b9cc0d091a134816912</td>
+              </tr>
+              <tr>
+                <td class="font-bold text-base-content">mechvibes-3.3.0-macos-arm64.dmg</td>
+                <td class="text-base-content/70 select-all">9f310bd87b6495166ac7713dcf52a4f49419b489a72d733b1f9b37c093a89091</td>
+              </tr>
+              <tr>
+                <td class="font-bold text-base-content">mechvibes_3.3.0_amd64.deb</td>
+                <td class="text-base-content/70 select-all">7b9264c7ad06915f0190a0cb401eecaa5e9664dbb02b553eef671bb6efd79672</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="bg-base-200/60 border-t border-base-300/80 py-16 px-6 lg:px-8 mt-20">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <img src="/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
+          <span class="font-bold text-lg">Mechvibes</span>
+        </div>
+        <p class="text-sm text-base-content/60 max-w-sm">
+          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+        </p>
+        <div class="flex gap-4 text-xs text-base-content/50 pt-2">
+          <span>Version 3.3.0</span>
+          <span>•</span>
+          <span>MIT Licensed</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/themes" class="hover:text-primary transition-colors">Themes</a></li>
+          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
+          <li><a href="/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
+      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
+        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="/download" class="hover:text-base-content">Releases</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal In-Browser Web Audio Synthesizer Engine -->
+  <script>
+    (function() {
+      // Audio engine with Web Audio API
+      let audioCtx = null;
+      let soundEnabled = true;
+      let activeBuffer = null;
+      let soundpackUrl = '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let volumeLevel = 0.8;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          loadSoundpack(soundpackUrl);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function loadSoundpack(url) {
+        soundpackUrl = url;
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
+          .then(decoded => {
+            activeBuffer = decoded;
+            console.log('[Mechvibes Web] Soundpack loaded:', url);
+          })
+          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+      }
+
+      function playKeyClick(randomPitch = true) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!activeBuffer || !audioCtx) return;
+
+        try {
+          const source = audioCtx.createBufferSource();
+          source.buffer = activeBuffer;
+
+          // Randomize slice to give realistic natural typing variation
+          const duration = 0.12; // 120ms click
+          const maxStart = Math.max(0, activeBuffer.duration - duration);
+          const start = Math.random() * maxStart;
+
+          if (randomPitch) {
+            source.playbackRate.value = 0.96 + Math.random() * 0.08;
+          }
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.value = volumeLevel;
+
+          source.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          source.start(0, start, duration);
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      // Expose globally
+      window.mechvibes = {
+        playKey: playKeyClick,
+        setSoundpack: (url) => {
+          initAudio();
+          loadSoundpack(url);
+        },
+        toggleSound: () => {
+          soundEnabled = !soundEnabled;
+          const label = document.getElementById('audioToggleLabel');
+          if (label) label.textContent = 'Sound: ' + (soundEnabled ? 'ON' : 'OFF');
+          return soundEnabled;
+        },
+        setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
+      };
+
+      // Toggle button event
+      const toggleBtn = document.getElementById('webAudioToggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          window.mechvibes.toggleSound();
+        });
+      }
+
+      // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
+      window.addEventListener('keydown', (e) => {
+        // Avoid double triggering if active target is not ignored
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          playKeyClick();
+        }
+      });
+    })();
+  </script>
+  
+</body>
+</html>

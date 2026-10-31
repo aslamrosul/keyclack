@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Mechvibes</title>
+  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
+  <meta property="og:title" content="Mechvibes"/>
+  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <meta property="og:image" content="/screens/ss1.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/theme.css"/>
+  <style>
+    /* Smooth interactive typography & ambient highlights */
+    body {
+      background-color: var(--color-base-100, #121316);
+      color: var(--color-base-content, #f4f4f5);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .keyboard-key {
+      transition: all 0.08s ease-in-out;
+      user-select: none;
+    }
+    .keyboard-key:active, .keyboard-key.active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(1.2);
+    }
+    /* Waveform canvas */
+    .waveform-bar {
+      transition: height 0.1s ease;
+    }
+  </style>
+  
+</head>
+<body class="MOT0tq_className antialiased min-h-screen flex flex-col bg-base-100 text-base-content selection:bg-primary/20">
+
+  <!-- Top Sticky Navigation Pill -->
+  <header class="sticky top-4 z-50 w-full px-4">
+    <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
+      <div class="flex shrink-0 items-center">
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
+          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-1">
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/blog">Blog</a>
+        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Interactive Web Sound Trigger Pill -->
+        <button id="webAudioToggle" class="btn btn-xs btn-outline btn-primary rounded-full gap-1.5 px-3">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span id="audioToggleLabel">Sound: ON</span>
+        </button>
+
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/login">Sign In</a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/blog">Blog</a>
+      <div class="divider my-1"></div>
+      <a class="btn btn-sm btn-neutral w-full" href="/login">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="flex-grow">
+    
+  <!-- HERO SECTION -->
+  <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Interactive App Mockup Showcase -->
+        <div class="lg:col-span-6 relative flex justify-center items-center min-h-[440px] sm:min-h-[520px]">
+          <div class="absolute -top-4 -right-4 w-72 h-72 bg-primary/20 rounded-full blur-3xl opacity-40"></div>
+          <div class="absolute -bottom-4 -left-4 w-72 h-72 bg-secondary/20 rounded-full blur-3xl opacity-40"></div>
+          
+          <div class="relative origin-center scale-[0.85] sm:scale-100 flex justify-center">
+            <!-- Screen 3: Ambient Mood / Settings -->
+            <div id="mockScreen3" onclick="bringToFront(3)" class="cursor-pointer absolute top-6 left-28 w-56 h-[420px] bg-black rounded-[1.8rem] shadow-xl border-4 border-gray-900/60 z-10 overflow-hidden transition-all duration-300 hover:scale-105">
+              <img alt="Mechvibes Mood Screen" class="w-full h-full object-cover" src="/screens/ss3.png"/>
+            </div>
+
+            <!-- Screen 2: Customize Theme -->
+            <div id="mockScreen2" onclick="bringToFront(2)" class="cursor-pointer absolute top-3 left-14 w-60 h-[450px] bg-black rounded-[1.8rem] shadow-2xl border-4 border-gray-900/70 z-20 overflow-hidden transition-all duration-300 hover:scale-105">
+              <img alt="Mechvibes Customize Screen" class="w-full h-full object-cover" src="/screens/ss2.png"/>
+            </div>
+
+            <!-- Screen 1: Main Home Screen -->
+            <div id="mockScreen1" onclick="bringToFront(1)" class="cursor-pointer relative w-64 h-[480px] bg-black rounded-[1.8rem] shadow-2xl border-4 border-gray-900/80 z-30 overflow-hidden transition-all duration-300 hover:scale-105">
+              <img alt="Mechvibes Main Screen" class="w-full h-full object-cover" src="/screens/ss1.png"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Hero Copy & CTA -->
+        <div class="lg:col-span-6 text-left space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+            Mechvibes v3.3.0 Release
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl font-black leading-tight tracking-tight text-base-content">
+            Transform your typing into a <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">satisfying</span> experience
+          </h1>
+
+          <p class="text-base-content/70 text-base sm:text-lg leading-relaxed">
+            Mechvibes brings rich, ultra low-latency mechanical keyboard and mouse sounds to every keystroke and click. From creamy custom tactile switches to classic clicky blues, make your keyboard uniquely yours.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <a class="btn btn-primary rounded-box shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all gap-2" href="/download">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+              Download Free
+            </a>
+
+            <a class="btn btn-outline border-base-content/20 hover:border-base-content/40 rounded-box gap-2" href="/sound-packs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+              Browse Sound Packs
+            </a>
+          </div>
+
+          <div class="flex items-center gap-4 text-xs text-base-content/50 pt-2">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Windows 10/11
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              macOS Silicon & Intel
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Linux AppImage / .deb
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE WEB TYPING TESTER PLAYGROUND -->
+  <section class="py-12 px-4 sm:px-6 lg:px-8 bg-base-200/50 border-y border-base-300/60">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-base-100 rounded-3xl border border-base-300 shadow-xl p-6 sm:p-8 space-y-6">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-base-300/80 pb-5">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="badge badge-success badge-sm">Interactive Preview</span>
+              <h3 class="text-xl font-bold">Try Typing Real Switches</h3>
+            </div>
+            <p class="text-xs text-base-content/60 mt-1">Select a switch and type in the box below to test Mechvibes acoustics live!</p>
+          </div>
+
+          <!-- Soundpack selector for typing preview -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-base-content/70">Sound Profile:</span>
+            <select id="switchSelector" class="select select-sm select-bordered rounded-lg bg-base-200 font-medium text-xs">
+              <option value="/soundpacks/keyboard/eg-oreo/oreo.ogg" selected>EG Oreo (Tactile Thock)</option>
+              <option value="/soundpacks/keyboard/cherrymx-blue-abs/sound.ogg">Cherry MX Blue (Crisp Clicky)</option>
+              <option value="/soundpacks/keyboard/cherrymx-black-abs/sound.ogg">Cherry MX Black (Heavy Linear)</option>
+              <option value="/soundpacks/keyboard/cherrymx-red-abs/sound.ogg">Cherry MX Red (Smooth Linear)</option>
+              <option value="/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg">Topre Purple Hybrid (Deep Thock)</option>
+              <option value="/soundpacks/keyboard/eg-crystal-purple/purple.ogg">EG Crystal Purple (Sharp Clack)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Typing input box -->
+        <div class="space-y-3">
+          <textarea id="liveTypingInput" rows="3" class="textarea textarea-bordered w-full text-lg leading-relaxed focus:textarea-primary rounded-2xl bg-base-200/60 font-mono transition-all" placeholder="Click here and start typing to hear the mechanical switch sound..."></textarea>
+          
+          <div class="flex flex-wrap justify-between items-center text-xs text-base-content/50 gap-2">
+            <div class="flex gap-4">
+              <span>Keystrokes: <strong id="strokeCount" class="text-primary font-mono">0</strong></span>
+              <span>WPM: <strong id="wpmCount" class="text-secondary font-mono">0</strong></span>
+            </div>
+            <span class="italic">Sound renders via local Web Audio with sub-10ms latency</span>
+          </div>
+        </div>
+
+        <!-- Virtual Keyboard Keys Visualizer -->
+        <div class="grid grid-cols-10 gap-1.5 pt-2 hidden sm:grid">
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              Q
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              W
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              E
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              R
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              T
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              Y
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              U
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              I
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              O
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              P
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              A
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              S
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              D
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              F
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              G
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              H
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              J
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              K
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              L
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              ;
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              Z
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              X
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              C
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              V
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              B
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              N
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              M
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              ,
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all " onclick="window.mechvibes.playKey(); animateKey(this)">
+              .
+            </button>
+          
+            <button type="button" class="keyboard-key py-2.5 rounded-lg bg-base-200 border border-base-300 text-xs font-mono font-bold text-center hover:bg-primary/20 transition-all col-span-10 py-3 bg-base-300/80" onclick="window.mechvibes.playKey(); animateKey(this)">
+              Space
+            </button>
+          
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES BENTO GRID -->
+  <section id="features" class="py-24 px-4 sm:px-6 lg:px-8 bg-base-200/30">
+    <div class="max-w-5xl mx-auto space-y-16">
+      
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">
+          Make every keystroke count toward your goals
+        </h2>
+        <p class="text-base text-base-content/70">
+          Deep customization meets modern audio technology.<br/>Your keyboard, your rules, your sounds.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-12 gap-5">
+        
+        <!-- Feature 1: Powerful Editor (col-span-8) -->
+        <div class="col-span-12 md:col-span-8 group relative bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4 relative z-10 max-w-md">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold">Powerful editor</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Create and calibrate personalized soundpacks with your favorite mechanical switches or custom audio samples in the dedicated web editor.
+            </p>
+            <div class="pt-2">
+              <a href="https://editor.mechvibes.com" target="_blank" class="btn btn-sm btn-neutral rounded-box gap-1">
+                Go to Editor
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+          </div>
+          <img src="/screens/ss1.png" alt="Editor Preview" class="absolute right-0 -bottom-10 w-72 rounded-tl-2xl shadow-2xl opacity-60 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 hidden sm:block pointer-events-none"/>
+        </div>
+
+        <!-- Feature 2: Universal Sound Triggers (col-span-4) -->
+        <div class="col-span-12 md:col-span-4 group bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold">Universal sound triggers</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Experience tactile auditory feedback across every single app on your system without lag or frame drops.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3: Rich Sound Library (col-span-4) -->
+        <div class="col-span-12 md:col-span-4 group bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-accent/10 text-accent flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            </div>
+            <h3 class="text-xl font-bold">Rich sound library</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Explore hundreds of curated community and official sound packs with audio previews and 1-click install.
+            </p>
+            <div class="pt-2">
+              <a href="/sound-packs" class="btn btn-sm btn-neutral rounded-box">Explore Library</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Deep Customization (col-span-8) -->
+        <div class="col-span-12 md:col-span-8 group relative bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4 relative z-10 max-w-md">
+            <div class="w-12 h-12 rounded-2xl bg-info/10 text-info flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold">Deep customization</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Personalize every single aspect of your typing experience with customizable themes, background wallpapers, opacity, and sound layers.
+            </p>
+            <div class="pt-2">
+              <a href="/themes" class="btn btn-sm btn-neutral rounded-box">Browse Themes</a>
+            </div>
+          </div>
+          <img src="/screens/ss2.png" alt="Customize Preview" class="absolute right-0 -bottom-10 w-72 rounded-tl-2xl shadow-2xl opacity-60 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 hidden sm:block pointer-events-none"/>
+        </div>
+
+        <!-- Feature 5: System Integration (col-span-8) -->
+        <div class="col-span-12 md:col-span-8 group relative bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4 relative z-10 max-w-md">
+            <div class="w-12 h-12 rounded-2xl bg-warning/10 text-warning flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"></path><rect x="14" y="2" width="8" height="8" rx="1"></rect></svg>
+            </div>
+            <h3 class="text-2xl font-bold">System integration</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Seamless background tray execution, automatic startup options, and custom global hotkeys for toggling sound instantly while playing or working.
+            </p>
+          </div>
+          <img src="/screens/ss3.png" alt="System Preview" class="absolute right-0 -bottom-10 w-72 rounded-tl-2xl shadow-2xl opacity-60 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 hidden sm:block pointer-events-none"/>
+        </div>
+
+        <!-- Feature 6: Built with Modern Technology (col-span-4) -->
+        <div class="col-span-12 md:col-span-4 group bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-error/10 text-error flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold">Built with Rust & Dioxus</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">
+              Rewritten from ground up with Rust memory safety and Dioxus GUI for feather-light memory usage and blazing speed.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-base-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <div class="lg:col-span-4 lg:sticky lg:top-28 self-start space-y-6">
+          <h2 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">
+            What users<br/>are saying
+          </h2>
+          <p class="text-sm text-base-content/70">
+            Join hundreds of thousands of typists, developers, and writers who transformed their desks with Mechvibes.
+          </p>
+          <div>
+            <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="btn btn-neutral rounded-box gap-2 shadow-lg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/></svg>
+              Join Our Discord
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  b
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">bobhurd</h4>
+                  <span class="text-xs text-base-content/50">@bobhurd</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">Excellent program that makes keyboard sounds as you type thus informing you audibly that you haven’t missed a keystroke. Kudos to the developers for developing this free program!</p>
+            </div>
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  s
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">sanyog45</h4>
+                  <span class="text-xs text-base-content/50">@sanyog45</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">I’ve never come across such great and simple software. Thank you for such simple and great app. Mechvibes makes typing so much more enjoyable!</p>
+            </div>
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  a
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">autisticphd</h4>
+                  <span class="text-xs text-base-content/50">@autisticphd</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">Brings me back to the times I had to write my reports on a typewriter. The nostalgic feeling is incredible and really enhances my writing experience.</p>
+            </div>
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  s
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">seann-69</h4>
+                  <span class="text-xs text-base-content/50">@seann69</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">Great variety of keyboard switch sounds! I love the different options available. The Oreo and Topre packs are absolute perfection.</p>
+            </div>
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  m
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">maximka</h4>
+                  <span class="text-xs text-base-content/50">@maximka</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">Best wishes to author, interesting! This software is really creative and adds so much character to typing. Love the innovation behind it.</p>
+            </div>
+          
+            <div class="p-6 rounded-2xl bg-base-200/50 border border-base-300 space-y-3 hover:border-primary/30 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center font-bold text-sm uppercase">
+                  m
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm leading-none">mak3r</h4>
+                  <span class="text-xs text-base-content/50">@mak3r</span>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-base-content/80 leading-relaxed">niiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiice! This is exactly what I was looking for. Simple, effective, and adds that satisfying mechanical feel to any keyboard.</p>
+            </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION ACCORDION -->
+  <section class="py-24 px-4 sm:px-6 lg:px-8 bg-base-200/40 border-t border-base-300/60">
+    <div class="max-w-2xl mx-auto space-y-12">
+      <div class="text-center space-y-3">
+        <h2 class="text-3xl font-black">Frequently Asked Questions</h2>
+        <p class="text-sm text-base-content/70">Everything you need to know about Mechvibes features and safety.</p>
+      </div>
+
+      <div class="space-y-3">
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion" checked /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              What is Mechvibes?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>Mechvibes is a free, open-source mechanical keyboard sound simulator that plays realistic key and mouse switch sounds whenever you type or click anywhere on your computer.</p>
+            </div>
+          </div>
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion"  /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              Is Mechvibes safe to use?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>Yes! Mechvibes is completely safe and 100% open source under the MIT license. It only reads key event codes to trigger corresponding audio slices locally. It does not record, log, or transmit any keystrokes or sensitive input data.</p>
+            </div>
+          </div>
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion"  /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              What platforms does Mechvibes support?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>Mechvibes 3.3.0 natively supports 64-bit Windows (10 and 11), macOS (Apple Silicon M-series & Intel), and Linux (via AppImage and .deb packages).</p>
+            </div>
+          </div>
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion"  /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              Can I create custom sound packs?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>Yes! You can craft your own custom packs using our web-based editor at editor.mechvibes.com and share them with the community or load them locally into the app.</p>
+            </div>
+          </div>
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion"  /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              How do I install sound packs?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>Simply visit the Library page on our website and click "Install in Mechvibes" to install with one click, or download the sound pack folder and drop it into your custom soundpacks directory.</p>
+            </div>
+          </div>
+        
+          <div class="collapse collapse-plus bg-base-100 rounded-2xl border border-base-300">
+            <input type="radio" name="faq-accordion"  /> 
+            <div class="collapse-title text-base font-semibold text-base-content">
+              Does Mechvibes affect system performance or gaming latency?
+            </div>
+            <div class="collapse-content text-sm text-base-content/70 leading-relaxed"> 
+              <p>No. Written natively in Rust with lightweight audio streaming, Mechvibes consumes less than 1% CPU and approximately 40MB of RAM, making it perfectly safe for high-framerate competitive gaming.</p>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive script for Home page -->
+  <script>
+    // Bring screens to front on click
+    function bringToFront(num) {
+      const s1 = document.getElementById('mockScreen1');
+      const s2 = document.getElementById('mockScreen2');
+      const s3 = document.getElementById('mockScreen3');
+      if (num === 1) {
+        s1.style.zIndex = '30'; s2.style.zIndex = '20'; s3.style.zIndex = '10';
+      } else if (num === 2) {
+        s2.style.zIndex = '30'; s1.style.zIndex = '20'; s3.style.zIndex = '10';
+      } else if (num === 3) {
+        s3.style.zIndex = '30'; s1.style.zIndex = '10'; s2.style.zIndex = '20';
+      }
+    }
+
+    // Typing tester logic
+    let strokeCount = 0;
+    let startTime = null;
+    const input = document.getElementById('liveTypingInput');
+    const strokeEl = document.getElementById('strokeCount');
+    const wpmEl = document.getElementById('wpmCount');
+    const switchSel = document.getElementById('switchSelector');
+
+    if (switchSel) {
+      switchSel.addEventListener('change', (e) => {
+        window.mechvibes.setSoundpack(e.target.value);
+      });
+    }
+
+    if (input) {
+      input.addEventListener('keydown', () => {
+        strokeCount++;
+        if (!startTime) startTime = Date.now();
+        if (strokeEl) strokeEl.textContent = strokeCount;
+
+        const minutes = (Date.now() - startTime) / 60000;
+        if (minutes > 0.05 && wpmEl) {
+          const words = input.value.trim().split(/\s+/).length;
+          wpmEl.textContent = Math.round(words / minutes);
+        }
+        window.mechvibes.playKey();
+      });
+    }
+
+    function animateKey(btn) {
+      btn.classList.add('active');
+      setTimeout(() => btn.classList.remove('active'), 120);
+    }
+  </script>
+  
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="bg-base-200/60 border-t border-base-300/80 py-16 px-6 lg:px-8 mt-20">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <img src="/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
+          <span class="font-bold text-lg">Mechvibes</span>
+        </div>
+        <p class="text-sm text-base-content/60 max-w-sm">
+          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+        </p>
+        <div class="flex gap-4 text-xs text-base-content/50 pt-2">
+          <span>Version 3.3.0</span>
+          <span>•</span>
+          <span>MIT Licensed</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/themes" class="hover:text-primary transition-colors">Themes</a></li>
+          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
+          <li><a href="/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
+      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
+        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="/download" class="hover:text-base-content">Releases</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal In-Browser Web Audio Synthesizer Engine -->
+  <script>
+    (function() {
+      // Audio engine with Web Audio API
+      let audioCtx = null;
+      let soundEnabled = true;
+      let activeBuffer = null;
+      let soundpackUrl = '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let volumeLevel = 0.8;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          loadSoundpack(soundpackUrl);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function loadSoundpack(url) {
+        soundpackUrl = url;
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
+          .then(decoded => {
+            activeBuffer = decoded;
+            console.log('[Mechvibes Web] Soundpack loaded:', url);
+          })
+          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+      }
+
+      function playKeyClick(randomPitch = true) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!activeBuffer || !audioCtx) return;
+
+        try {
+          const source = audioCtx.createBufferSource();
+          source.buffer = activeBuffer;
+
+          // Randomize slice to give realistic natural typing variation
+          const duration = 0.12; // 120ms click
+          const maxStart = Math.max(0, activeBuffer.duration - duration);
+          const start = Math.random() * maxStart;
+
+          if (randomPitch) {
+            source.playbackRate.value = 0.96 + Math.random() * 0.08;
+          }
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.value = volumeLevel;
+
+          source.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          source.start(0, start, duration);
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      // Expose globally
+      window.mechvibes = {
+        playKey: playKeyClick,
+        setSoundpack: (url) => {
+          initAudio();
+          loadSoundpack(url);
+        },
+        toggleSound: () => {
+          soundEnabled = !soundEnabled;
+          const label = document.getElementById('audioToggleLabel');
+          if (label) label.textContent = 'Sound: ' + (soundEnabled ? 'ON' : 'OFF');
+          return soundEnabled;
+        },
+        setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
+      };
+
+      // Toggle button event
+      const toggleBtn = document.getElementById('webAudioToggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          window.mechvibes.toggleSound();
+        });
+      }
+
+      // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
+      window.addEventListener('keydown', (e) => {
+        // Avoid double triggering if active target is not ignored
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          playKeyClick();
+        }
+      });
+    })();
+  </script>
+  
+</body>
+</html>

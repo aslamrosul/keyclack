@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Themes - Mechvibes</title>
+  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
+  <meta property="og:title" content="Themes - Mechvibes"/>
+  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <meta property="og:image" content="/screens/ss1.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/theme.css"/>
+  <style>
+    /* Smooth interactive typography & ambient highlights */
+    body {
+      background-color: var(--color-base-100, #121316);
+      color: var(--color-base-content, #f4f4f5);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .keyboard-key {
+      transition: all 0.08s ease-in-out;
+      user-select: none;
+    }
+    .keyboard-key:active, .keyboard-key.active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(1.2);
+    }
+    /* Waveform canvas */
+    .waveform-bar {
+      transition: height 0.1s ease;
+    }
+  </style>
+  
+</head>
+<body class="MOT0tq_className antialiased min-h-screen flex flex-col bg-base-100 text-base-content selection:bg-primary/20">
+
+  <!-- Top Sticky Navigation Pill -->
+  <header class="sticky top-4 z-50 w-full px-4">
+    <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
+      <div class="flex shrink-0 items-center">
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
+          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-1">
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/blog">Blog</a>
+        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Interactive Web Sound Trigger Pill -->
+        <button id="webAudioToggle" class="btn btn-xs btn-outline btn-primary rounded-full gap-1.5 px-3">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span id="audioToggleLabel">Sound: ON</span>
+        </button>
+
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/login">Sign In</a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/blog">Blog</a>
+      <div class="divider my-1"></div>
+      <a class="btn btn-sm btn-neutral w-full" href="/login">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="flex-grow">
+    
+  <section class="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto space-y-12">
+      
+      <!-- Page Header -->
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <div class="badge badge-secondary badge-outline text-xs uppercase tracking-wider font-semibold">Custom Styling</div>
+        <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Themes Gallery</h1>
+        <p class="text-sm sm:text-base text-base-content/70">
+          Personalize the look and feel of Mechvibes. Preview themes in real time, customize color hexes, and export .mvtheme files.
+        </p>
+      </div>
+
+      <!-- Real-Time Theme Previewer & Creator Studio -->
+      <div class="bg-base-200/50 rounded-3xl border border-base-300 p-6 sm:p-10 shadow-2xl grid lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Controls Column -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="space-y-1">
+            <h3 class="text-xl font-bold">Theme Studio</h3>
+            <p class="text-xs text-base-content/60">Select a theme or customize colors live.</p>
+          </div>
+
+          <!-- Presets Dropdown -->
+          <div class="space-y-2">
+            <label class="text-xs font-semibold text-base-content/70">Theme Preset</label>
+            <select id="themeSelect" onchange="applyThemePreset(this.value)" class="select select-bordered select-sm w-full rounded-xl bg-base-100">
+              <option value="dark-synthwave">Dark Synthwave (Mechvibes)</option><option value="minimalist-white">Minimalist White (CleanType)</option><option value="forest-green">Forest Green (NatureVibes)</option><option value="ocean-breeze">Ocean Breeze (AquaTypist)</option><option value="sunset-gradient">Sunset Gradient (HorizonDesign)</option><option value="cyberpunk-neon">Cyberpunk Neon (NightCity)</option>
+            </select>
+          </div>
+
+          <!-- Color Pickers -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] font-medium text-base-content/60 block mb-1">Primary Color</label>
+              <input type="color" id="primaryColor" value="#ff7ac6" onchange="updateThemeCustomColor()" class="w-full h-8 rounded-lg cursor-pointer bg-base-100 p-0.5 border border-base-300"/>
+            </div>
+            <div>
+              <label class="text-[11px] font-medium text-base-content/60 block mb-1">Secondary Color</label>
+              <input type="color" id="secondaryColor" value="#bd93f9" onchange="updateThemeCustomColor()" class="w-full h-8 rounded-lg cursor-pointer bg-base-100 p-0.5 border border-base-300"/>
+            </div>
+            <div>
+              <label class="text-[11px] font-medium text-base-content/60 block mb-1">Background Base</label>
+              <input type="color" id="baseColor" value="#191a21" onchange="updateThemeCustomColor()" class="w-full h-8 rounded-lg cursor-pointer bg-base-100 p-0.5 border border-base-300"/>
+            </div>
+            <div>
+              <label class="text-[11px] font-medium text-base-content/60 block mb-1">Text Color</label>
+              <input type="color" id="textColor" value="#f8f8f2" onchange="updateThemeCustomColor()" class="w-full h-8 rounded-lg cursor-pointer bg-base-100 p-0.5 border border-base-300"/>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="pt-2 flex gap-3">
+            <button onclick="downloadActiveTheme()" class="btn btn-sm btn-primary flex-1 rounded-xl gap-2 shadow-lg shadow-primary/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Export .mvtheme
+            </button>
+            <button onclick="copyThemeJSON()" class="btn btn-sm btn-neutral rounded-xl">
+              Copy JSON
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Visual Mockup Window -->
+        <div class="lg:col-span-7">
+          <div id="mockupWindow" class="w-full max-w-md mx-auto rounded-[2rem] border-4 border-gray-950 p-6 shadow-2xl transition-all duration-300 space-y-6" style="background-color: #191a21; color: #f8f8f2;">
+            
+            <!-- Window header -->
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <img src="/logo.svg" alt="logo" class="w-5 h-5"/>
+                <span class="font-bold text-xs tracking-tight">Mechvibes Preview</span>
+              </div>
+              <div class="flex gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+              </div>
+            </div>
+
+            <!-- Active Pack Selector preview -->
+            <div class="p-3.5 rounded-xl border border-white/10 space-y-1.5" style="background-color: rgba(255,255,255,0.04)">
+              <div class="text-[10px] opacity-60 uppercase font-semibold">Active Keyboard Switch</div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold">EG Oreo (Tactile 67g)</span>
+                <span id="previewTag" class="badge badge-sm font-semibold" style="background-color: #ff7ac6; color: #191a21;">Active</span>
+              </div>
+            </div>
+
+            <!-- Volume Slider Mockup -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs opacity-75 font-medium">
+                <span>Output Volume</span>
+                <span>80%</span>
+              </div>
+              <input type="range" min="0" max="100" value="80" class="range range-xs" style="accent-color: #ff7ac6;"/>
+            </div>
+
+            <!-- Mock Bottom Dock -->
+            <div class="p-2.5 rounded-2xl flex justify-around items-center border border-white/10" style="background-color: rgba(255,255,255,0.06)">
+              <button class="p-2 rounded-xl" style="background-color: #ff7ac6; color: #191a21;">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              </button>
+              <button class="p-2 rounded-xl opacity-60">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+              </button>
+              <button class="p-2 rounded-xl opacity-60">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Presets Showcase Grid -->
+      <div class="space-y-6 pt-6">
+        <h2 class="text-2xl font-bold">Featured Theme Packs</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Dark Synthwave</h3>
+                <span class="text-xs text-base-content/50">58.2k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">Retro futuristic neon colors over a deep purple and obsidian canvas.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #ff7ac6" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #bd93f9" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #191a21" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #f8f8f2" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by Mechvibes</span>
+                <button onclick="applyThemeById('dark-synthwave')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Minimalist White</h3>
+                <span class="text-xs text-base-content/50">42.1k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">Clean, distraction-free monochrome light aesthetic with subtle grey contours.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #18181b" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #71717a" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #ffffff" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #09090b" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by CleanType</span>
+                <button onclick="applyThemeById('minimalist-white')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Forest Green</h3>
+                <span class="text-xs text-base-content/50">36.8k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">Calming botanical tones inspired by lush pine trees and organic moss.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #22c55e" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #16a34a" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #052e16" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #f0fdf4" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by NatureVibes</span>
+                <button onclick="applyThemeById('forest-green')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Ocean Breeze</h3>
+                <span class="text-xs text-base-content/50">31.4k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">Deep nautical blues with refreshing turquoise and cyan highlights.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #06b6d4" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #0284c7" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #082f49" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #f0f9ff" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by AquaTypist</span>
+                <button onclick="applyThemeById('ocean-breeze')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Sunset Gradient</h3>
+                <span class="text-xs text-base-content/50">27.9k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">Warm evening glow transitioning from twilight amber to vibrant coral.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #f97316" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #ec4899" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #1c1917" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #fafaf9" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by HorizonDesign</span>
+                <button onclick="applyThemeById('sunset-gradient')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+            <div class="bg-base-100 rounded-3xl border border-base-300 p-6 space-y-4 hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-lg">Cyberpunk Neon</h3>
+                <span class="text-xs text-base-content/50">49.0k DL</span>
+              </div>
+              <p class="text-xs text-base-content/70 leading-relaxed">High-contrast electric yellow and cyan with sharp carbon-fiber dark panels.</p>
+              
+              <!-- Color swatches preview -->
+              <div class="flex gap-2">
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #fcee0a" title="Primary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #00f0ff" title="Secondary"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #0b0b0e" title="Background"></span>
+                <span class="w-6 h-6 rounded-full border border-black/20 shadow-sm" style="background-color: #fffffa" title="Text"></span>
+              </div>
+
+              <div class="pt-3 border-t border-base-300/60 flex items-center justify-between">
+                <span class="text-xs text-base-content/50">by NightCity</span>
+                <button onclick="applyThemeById('cyberpunk-neon')" class="btn btn-xs btn-outline btn-primary rounded-lg">Apply Preview</button>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const themesData = [{"id":"dark-synthwave","name":"Dark Synthwave","author":"Mechvibes","description":"Retro futuristic neon colors over a deep purple and obsidian canvas.","downloads":"58.2k","colors":{"primary":"#ff7ac6","secondary":"#bd93f9","accent":"#50fa7b","neutral":"#282a36","base100":"#191a21","base200":"#21222c","base300":"#282a36","baseContent":"#f8f8f2"}},{"id":"minimalist-white","name":"Minimalist White","author":"CleanType","description":"Clean, distraction-free monochrome light aesthetic with subtle grey contours.","downloads":"42.1k","colors":{"primary":"#18181b","secondary":"#71717a","accent":"#2563eb","neutral":"#f4f4f5","base100":"#ffffff","base200":"#f4f4f5","base300":"#e4e4e7","baseContent":"#09090b"}},{"id":"forest-green","name":"Forest Green","author":"NatureVibes","description":"Calming botanical tones inspired by lush pine trees and organic moss.","downloads":"36.8k","colors":{"primary":"#22c55e","secondary":"#16a34a","accent":"#86efac","neutral":"#14532d","base100":"#052e16","base200":"#0f3a22","base300":"#19492f","baseContent":"#f0fdf4"}},{"id":"ocean-breeze","name":"Ocean Breeze","author":"AquaTypist","description":"Deep nautical blues with refreshing turquoise and cyan highlights.","downloads":"31.4k","colors":{"primary":"#06b6d4","secondary":"#0284c7","accent":"#38bdf8","neutral":"#0f172a","base100":"#082f49","base200":"#0c4a6e","base300":"#075985","baseContent":"#f0f9ff"}},{"id":"sunset-gradient","name":"Sunset Gradient","author":"HorizonDesign","description":"Warm evening glow transitioning from twilight amber to vibrant coral.","downloads":"27.9k","colors":{"primary":"#f97316","secondary":"#ec4899","accent":"#fbbf24","neutral":"#431407","base100":"#1c1917","base200":"#292524","base300":"#44403c","baseContent":"#fafaf9"}},{"id":"cyberpunk-neon","name":"Cyberpunk Neon","author":"NightCity","description":"High-contrast electric yellow and cyan with sharp carbon-fiber dark panels.","downloads":"49.0k","colors":{"primary":"#fcee0a","secondary":"#00f0ff","accent":"#ff003c","neutral":"#111114","base100":"#0b0b0e","base200":"#141419","base300":"#1f1f28","baseContent":"#fffffa"}}];
+    let currentTheme = themesData[0];
+
+    function applyThemeById(id) {
+      const found = themesData.find(t => t.id === id);
+      if (found) {
+        currentTheme = found;
+        const sel = document.getElementById('themeSelect');
+        if (sel) sel.value = id;
+        renderMockup();
+      }
+    }
+
+    function applyThemePreset(id) {
+      applyThemeById(id);
+    }
+
+    function updateThemeCustomColor() {
+      currentTheme = {
+        id: 'custom-theme',
+        name: 'Custom Theme',
+        author: 'User',
+        colors: {
+          primary: document.getElementById('primaryColor').value,
+          secondary: document.getElementById('secondaryColor').value,
+          base100: document.getElementById('baseColor').value,
+          baseContent: document.getElementById('textColor').value
+        }
+      };
+      renderMockup();
+    }
+
+    function renderMockup() {
+      const mock = document.getElementById('mockupWindow');
+      const tag = document.getElementById('previewTag');
+      if (mock && currentTheme) {
+        mock.style.backgroundColor = currentTheme.colors.base100;
+        mock.style.color = currentTheme.colors.baseContent;
+        if (tag) {
+          tag.style.backgroundColor = currentTheme.colors.primary;
+          tag.style.color = currentTheme.colors.base100;
+        }
+      }
+    }
+
+    function downloadActiveTheme() {
+      const blob = new Blob([JSON.stringify(currentTheme, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (currentTheme.id || 'custom-theme') + '.mvtheme';
+      a.click();
+    }
+
+    function copyThemeJSON() {
+      navigator.clipboard.writeText(JSON.stringify(currentTheme, null, 2));
+      alert('Theme configuration copied to clipboard!');
+    }
+  </script>
+  
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="bg-base-200/60 border-t border-base-300/80 py-16 px-6 lg:px-8 mt-20">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <img src="/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
+          <span class="font-bold text-lg">Mechvibes</span>
+        </div>
+        <p class="text-sm text-base-content/60 max-w-sm">
+          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+        </p>
+        <div class="flex gap-4 text-xs text-base-content/50 pt-2">
+          <span>Version 3.3.0</span>
+          <span>•</span>
+          <span>MIT Licensed</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/themes" class="hover:text-primary transition-colors">Themes</a></li>
+          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
+          <li><a href="/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
+      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
+        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="/download" class="hover:text-base-content">Releases</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal In-Browser Web Audio Synthesizer Engine -->
+  <script>
+    (function() {
+      // Audio engine with Web Audio API
+      let audioCtx = null;
+      let soundEnabled = true;
+      let activeBuffer = null;
+      let soundpackUrl = '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let volumeLevel = 0.8;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          loadSoundpack(soundpackUrl);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function loadSoundpack(url) {
+        soundpackUrl = url;
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
+          .then(decoded => {
+            activeBuffer = decoded;
+            console.log('[Mechvibes Web] Soundpack loaded:', url);
+          })
+          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+      }
+
+      function playKeyClick(randomPitch = true) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!activeBuffer || !audioCtx) return;
+
+        try {
+          const source = audioCtx.createBufferSource();
+          source.buffer = activeBuffer;
+
+          // Randomize slice to give realistic natural typing variation
+          const duration = 0.12; // 120ms click
+          const maxStart = Math.max(0, activeBuffer.duration - duration);
+          const start = Math.random() * maxStart;
+
+          if (randomPitch) {
+            source.playbackRate.value = 0.96 + Math.random() * 0.08;
+          }
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.value = volumeLevel;
+
+          source.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          source.start(0, start, duration);
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      // Expose globally
+      window.mechvibes = {
+        playKey: playKeyClick,
+        setSoundpack: (url) => {
+          initAudio();
+          loadSoundpack(url);
+        },
+        toggleSound: () => {
+          soundEnabled = !soundEnabled;
+          const label = document.getElementById('audioToggleLabel');
+          if (label) label.textContent = 'Sound: ' + (soundEnabled ? 'ON' : 'OFF');
+          return soundEnabled;
+        },
+        setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
+      };
+
+      // Toggle button event
+      const toggleBtn = document.getElementById('webAudioToggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          window.mechvibes.toggleSound();
+        });
+      }
+
+      // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
+      window.addEventListener('keydown', (e) => {
+        // Avoid double triggering if active target is not ignored
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          playKeyClick();
+        }
+      });
+    })();
+  </script>
+  
+</body>
+</html>
