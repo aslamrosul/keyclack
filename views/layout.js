@@ -152,11 +152,15 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
   <!-- Universal In-Browser Web Audio Synthesizer Engine -->
   <script>
     (function() {
+      // Dynamic base URL for GitHub Pages
+      const isGhPages = window.location.hostname.includes('github.io');
+      window.__MECHVIBES_BASE__ = isGhPages ? '/mechvibes' : '';
+
       // Audio engine with Web Audio API
       let audioCtx = null;
       let soundEnabled = true;
       let activeBuffer = null;
-      let soundpackUrl = '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let soundpackUrl = (window.__MECHVIBES_BASE__ || '') + '/soundpacks/keyboard/eg-oreo/oreo.ogg';
       let volumeLevel = 0.8;
 
       function initAudio() {
@@ -171,6 +175,9 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
       }
 
       function loadSoundpack(url) {
+        if (window.__MECHVIBES_BASE__ && url.startsWith('/') && !url.startsWith(window.__MECHVIBES_BASE__)) {
+          url = window.__MECHVIBES_BASE__ + url;
+        }
         soundpackUrl = url;
         fetch(url)
           .then(res => res.arrayBuffer())
