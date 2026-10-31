@@ -8,7 +8,7 @@ function renderThemes(themesList) {
         <div class="badge badge-secondary badge-outline text-xs uppercase tracking-wider font-semibold">Custom Styling</div>
         <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Themes Gallery</h1>
         <p class="text-sm sm:text-base text-base-content/70">
-          Personalize the look and feel of Mechvibes. Preview themes in real time, customize color hexes, and export .mvtheme files.
+          Personalize the look and feel of KeyClack. Preview themes in real time, customize color hexes, and export custom theme files.
         </p>
       </div>
 
@@ -70,7 +70,7 @@ function renderThemes(themesList) {
             <div class="flex items-center justify-between pb-3 border-b border-white/10">
               <div class="flex items-center gap-2">
                 <img src="/logo.svg" alt="logo" class="w-5 h-5"/>
-                <span class="font-bold text-xs tracking-tight">Mechvibes Preview</span>
+                <span class="font-bold text-xs tracking-tight">KeyClack Preview</span>
               </div>
               <div class="flex gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>

@@ -2,7 +2,7 @@ const themes = [
   {
     id: 'dark-synthwave',
     name: 'Dark Synthwave',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     description: 'Retro futuristic neon colors over a deep purple and obsidian canvas.',
     downloads: '58.2k',
     colors: {

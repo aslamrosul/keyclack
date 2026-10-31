@@ -1,15 +1,23 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "keyclack",
+  "version": "3.3.0",
+  "description": "KeyClack - Authentic Mechanical Keyboard Acoustics Website, Sound Library, & REST API",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:gh-pages": "node export-gh-pages.js --gh-pages"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "keyboard",
+    "mechanical-keyboard",
+    "audio",
+    "sound-simulator",
+    "thock",
+    "clicky",
+    "cherry-mx"
+  ],
+  "author": "aslamrosul",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.3.0",

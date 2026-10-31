@@ -17,7 +17,7 @@ function renderSoundpackDetail(sp) {
         
         <div class="md:col-span-5 relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-base-300 shadow-md">
           <img src="${sp.coverImage || '/screens/ss1.png'}" alt="${sp.title}" class="w-full h-full object-cover"/>
-          <button onclick="window.mechvibes.setSoundpack('${sp.soundFile}'); window.mechvibes.playKey();" class="btn btn-circle btn-primary btn-lg absolute inset-0 m-auto shadow-2xl hover:scale-110 transition-transform">
+          <button onclick="window.keyclack.setSoundpack('${sp.soundFile}'); window.keyclack.playKey();" class="btn btn-circle btn-primary btn-lg absolute inset-0 m-auto shadow-2xl hover:scale-110 transition-transform">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
         </div>
@@ -45,7 +45,7 @@ function renderSoundpackDetail(sp) {
           <div class="pt-4 border-t border-base-300/80 flex flex-wrap items-center gap-3">
             <a href="mechvibes://install/${sp.id}" class="btn btn-primary rounded-2xl gap-2 shadow-lg shadow-primary/20">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Install in Mechvibes
+              Install in KeyClack
             </a>
 
             <a href="${sp.soundFile}" download class="btn btn-neutral rounded-2xl gap-2">
@@ -80,7 +80,7 @@ function renderSoundpackDetail(sp) {
           </div>
           <div class="p-4 rounded-xl bg-base-200/50 space-y-1">
             <div class="text-base-content/50 uppercase tracking-wider font-semibold">Compatible App Version</div>
-            <div class="font-semibold text-sm text-base-content">Mechvibes v2.x / v3.x</div>
+            <div class="font-semibold text-sm text-base-content">KeyClack & Standard Pack Format</div>
           </div>
           <div class="p-4 rounded-xl bg-base-200/50 space-y-1">
             <div class="text-base-content/50 uppercase tracking-wider font-semibold">License</div>
@@ -94,11 +94,11 @@ function renderSoundpackDetail(sp) {
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.mechvibes.setSoundpack('${sp.soundFile}');
+      window.keyclack.setSoundpack('${sp.soundFile}');
       const tInput = document.getElementById('detailTypingInput');
       if (tInput) {
         tInput.addEventListener('keydown', () => {
-          window.mechvibes.playKey();
+          window.keyclack.playKey();
         });
       }
     });

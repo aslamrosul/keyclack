@@ -3,7 +3,7 @@ const soundpacks = [
   {
     slug: 'eg-oreo',
     title: 'EG Oreo',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-eg-oreo',
     downloads: '142.5k',
     rating: 4.9,
@@ -18,7 +18,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-black-abs',
     title: 'Cherry MX Black - ABS Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-black-abs',
     downloads: '98.2k',
     rating: 4.8,
@@ -33,7 +33,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-black-pbt',
     title: 'Cherry MX Black - PBT Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-black-pbt',
     downloads: '85.4k',
     rating: 4.8,
@@ -48,7 +48,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-blue-abs',
     title: 'Cherry MX Blue - ABS Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-blue-abs',
     downloads: '112.0k',
     rating: 4.7,
@@ -63,7 +63,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-blue-pbt',
     title: 'Cherry MX Blue - PBT Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-blue-pbt',
     downloads: '73.1k',
     rating: 4.6,
@@ -78,7 +78,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-brown-abs',
     title: 'Cherry MX Brown - ABS Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-brown-abs',
     downloads: '89.6k',
     rating: 4.6,
@@ -93,7 +93,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-brown-pbt',
     title: 'Cherry MX Brown - PBT Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-brown-pbt',
     downloads: '64.9k',
     rating: 4.6,
@@ -108,7 +108,7 @@ const soundpacks = [
   {
     slug: 'cherrymx-red-abs',
     title: 'Cherry MX Red - ABS Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-cherrymx-red-abs',
     downloads: '105.3k',
     rating: 4.8,
@@ -123,7 +123,7 @@ const soundpacks = [
   {
     slug: 'eg-crystal-purple',
     title: 'EG Crystal Purple',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-eg-crystal-purple',
     downloads: '78.2k',
     rating: 4.8,
@@ -138,7 +138,7 @@ const soundpacks = [
   {
     slug: 'topre-purple-hybrid-pbt',
     title: 'Topre Purple Hybrid - PBT Keycaps',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'keyboard-topre-purple-hybrid-pbt',
     downloads: '131.8k',
     rating: 4.95,
@@ -154,7 +154,7 @@ const soundpacks = [
   {
     slug: 'mouse-ping',
     title: 'Ping',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'mouse-ping',
     downloads: '42.1k',
     rating: 4.7,
@@ -169,7 +169,7 @@ const soundpacks = [
   {
     slug: 'mouse-wooden',
     title: 'Wooden Mouse',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'mouse-wooden',
     downloads: '29.4k',
     rating: 4.8,
@@ -184,7 +184,7 @@ const soundpacks = [
   {
     slug: 'mouse-vibrate',
     title: 'Vibrate Mouse',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'mouse-vibrate',
     downloads: '21.0k',
     rating: 4.5,
@@ -199,7 +199,7 @@ const soundpacks = [
   {
     slug: 'mouse-chat',
     title: 'Chat Mouse',
-    author: 'Mechvibes',
+    author: 'KeyClack',
     id: 'mouse-chat',
     downloads: '18.5k',
     rating: 4.6,

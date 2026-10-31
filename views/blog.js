@@ -3,7 +3,7 @@ function renderBlogList(posts) {
   <section class="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto space-y-12">
       <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Mechvibes Blog & News</h1>
+        <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">KeyClack Blog & News</h1>
         <p class="text-sm sm:text-base text-base-content/70">
           Engineering insights, security breakdowns, audio tutorials, and platform updates.
         </p>
@@ -74,7 +74,7 @@ function renderBlogPost(p) {
 
       <div class="pt-8 border-t border-base-300 flex justify-between items-center">
         <a href="/blog" class="btn btn-sm btn-ghost gap-2">← Back to Blog</a>
-        <a href="/download" class="btn btn-sm btn-primary rounded-xl">Try Mechvibes</a>
+        <a href="/download" class="btn btn-sm btn-primary rounded-xl">Try KeyClack</a>
       </div>
     </div>
   </section>

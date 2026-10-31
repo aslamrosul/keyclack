@@ -7,16 +7,45 @@ function renderDownload() {
       <div class="text-center space-y-4 max-w-2xl mx-auto">
         <div class="badge badge-primary badge-outline text-xs uppercase tracking-wider font-semibold">Latest Release v3.3.0</div>
         <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-base-content">
-          Download Mechvibes
+          Download <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">KeyClack</span>
         </h1>
         <p class="text-base text-base-content/70">
-          Get the official release for your operating system. Free, open source, and lightweight.
+          Get the standalone release for your operating system. Free, open source, and lightweight.
         </p>
       </div>
 
       <!-- OS Cards Grid -->
       <div class="grid md:grid-cols-3 gap-6">
         
+        <!-- Linux Card (Featured / Highlighted) -->
+        <div class="bg-base-100 rounded-3xl border-2 border-primary/40 p-8 flex flex-col justify-between hover:border-primary hover:shadow-2xl transition-all duration-300 relative group order-first md:order-none">
+          <div class="absolute -top-3 right-6 badge badge-primary text-[10px] font-bold">Recommended on Linux</div>
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 0-4 4v5.38A5.99 5.99 0 0 0 5 17c0 2.21 3.13 4 7 4s7-1.79 7-4a5.99 5.99 0 0 0-3-5.62V6a4 4 0 0 0-4-4zm-2 5a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold">Linux</h3>
+              <p class="text-xs text-base-content/60 mt-1">Ubuntu, Mint, Debian, Arch, Fedora</p>
+            </div>
+            <ul class="text-xs text-base-content/70 space-y-2">
+              <li class="flex items-center gap-2">✓ Standalone universal AppImage</li>
+              <li class="flex items-center gap-2">✓ Debian / Ubuntu .deb package</li>
+              <li class="flex items-center gap-2">✓ Wayland & X11 evdev low latency</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3 pt-6 border-t border-base-300/80">
+            <a href="https://github.com/aslamrosul/keyclack/releases" class="btn btn-primary w-full rounded-box gap-2 shadow-lg shadow-primary/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download AppImage (x86_64)
+            </a>
+            <a href="https://github.com/aslamrosul/keyclack/releases" class="btn btn-ghost btn-sm w-full rounded-box text-xs">
+              Download .deb package
+            </a>
+          </div>
+        </div>
+
         <!-- Windows Card -->
         <div class="bg-base-100 rounded-3xl border border-base-300 p-8 flex flex-col justify-between hover:border-primary/50 hover:shadow-2xl transition-all duration-300 group">
           <div class="space-y-6">
@@ -35,9 +64,9 @@ function renderDownload() {
           </div>
 
           <div class="space-y-3 pt-6 border-t border-base-300/80">
-            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/Mechvibes-3.3.0-Setup-x64.exe" class="btn btn-primary w-full rounded-box gap-2 shadow-lg shadow-primary/20">
+            <a href="https://github.com/aslamrosul/keyclack/releases" class="btn btn-neutral w-full rounded-box gap-2 shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Download .exe (x64)
+              Download Setup (.exe)
             </a>
             <div class="text-[10px] text-center text-base-content/40">File size: ~22 MB</div>
           </div>
@@ -61,40 +90,11 @@ function renderDownload() {
           </div>
 
           <div class="space-y-3 pt-6 border-t border-base-300/80">
-            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-macos-arm64.dmg" class="btn btn-neutral w-full rounded-box gap-2">
+            <a href="https://github.com/aslamrosul/keyclack/releases" class="btn btn-neutral w-full rounded-box gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download .dmg (Apple Silicon)
             </a>
             <div class="text-[10px] text-center text-base-content/40">Requires Input Monitoring permission</div>
-          </div>
-        </div>
-
-        <!-- Linux Card (Featured / Highlighted) -->
-        <div class="bg-base-100 rounded-3xl border-2 border-primary/40 p-8 flex flex-col justify-between hover:border-primary hover:shadow-2xl transition-all duration-300 relative group">
-          <div class="absolute -top-3 right-6 badge badge-primary text-[10px] font-bold">Active Platform</div>
-          <div class="space-y-6">
-            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
-              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 0-4 4v5.38A5.99 5.99 0 0 0 5 17c0 2.21 3.13 4 7 4s7-1.79 7-4a5.99 5.99 0 0 0-3-5.62V6a4 4 0 0 0-4-4zm-2 5a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/></svg>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">Linux</h3>
-              <p class="text-xs text-base-content/60 mt-1">Ubuntu, Debian, Fedora, Arch, Nix</p>
-            </div>
-            <ul class="text-xs text-base-content/70 space-y-2">
-              <li class="flex items-center gap-2">✓ Standalone universal AppImage</li>
-              <li class="flex items-center gap-2">✓ Debian / Ubuntu .deb package</li>
-              <li class="flex items-center gap-2">✓ Wayland & X11 evdev low latency</li>
-            </ul>
-          </div>
-
-          <div class="space-y-3 pt-6 border-t border-base-300/80">
-            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-x86_64.AppImage" class="btn btn-primary w-full rounded-box gap-2 shadow-lg shadow-primary/20">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Download .AppImage
-            </a>
-            <a href="https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes_3.3.0_amd64.deb" class="btn btn-ghost btn-sm w-full rounded-box text-xs">
-              Download .deb package
-            </a>
           </div>
         </div>
 
@@ -117,19 +117,19 @@ function renderDownload() {
             </thead>
             <tbody>
               <tr>
-                <td class="font-bold text-base-content">mechvibes-3.3.0-x86_64.AppImage</td>
+                <td class="font-bold text-base-content">keyclack-3.3.0-x86_64.AppImage</td>
                 <td class="text-base-content/70 select-all">ef655b05ac26feebfd3bc24ec7ccb30389cefc332152862c95e5b3ee28e83120</td>
               </tr>
               <tr>
-                <td class="font-bold text-base-content">Mechvibes-3.3.0-Setup-x64.exe</td>
+                <td class="font-bold text-base-content">KeyClack-3.3.0-Setup-x64.exe</td>
                 <td class="text-base-content/70 select-all">4a9192e2dc629cbe1ff893d56ef17b44781cae9365287b9cc0d091a134816912</td>
               </tr>
               <tr>
-                <td class="font-bold text-base-content">mechvibes-3.3.0-macos-arm64.dmg</td>
+                <td class="font-bold text-base-content">keyclack-3.3.0-macos-arm64.dmg</td>
                 <td class="text-base-content/70 select-all">9f310bd87b6495166ac7713dcf52a4f49419b489a72d733b1f9b37c093a89091</td>
               </tr>
               <tr>
-                <td class="font-bold text-base-content">mechvibes_3.3.0_amd64.deb</td>
+                <td class="font-bold text-base-content">keyclack_3.3.0_amd64.deb</td>
                 <td class="text-base-content/70 select-all">7b9264c7ad06915f0190a0cb401eecaa5e9664dbb02b553eef671bb6efd79672</td>
               </tr>
             </tbody>

@@ -11,7 +11,7 @@ function renderSoundpacks(soundpacksList, query = {}) {
       <div class="text-center space-y-4 max-w-2xl mx-auto">
         <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Sound Packs Library</h1>
         <p class="text-sm sm:text-base text-base-content/70">
-          Discover hundreds of custom mechanical switch soundpacks. Preview audio in your browser and install directly into Mechvibes.
+          Discover hundreds of custom mechanical switch soundpacks. Preview audio in your browser and install directly into KeyClack.
         </p>
       </div>
 
@@ -99,7 +99,7 @@ function renderSoundpacks(soundpacksList, query = {}) {
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/${sp.id}" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/${sp.id}" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -129,8 +129,8 @@ function renderSoundpacks(soundpacksList, query = {}) {
 
   <script>
     function previewAudio(soundFile, title) {
-      window.mechvibes.setSoundpack(soundFile);
-      window.mechvibes.playKey();
+      window.keyclack.setSoundpack(soundFile);
+      window.keyclack.playKey();
 
       const toast = document.getElementById('previewToast');
       const titleEl = document.getElementById('previewTitle');

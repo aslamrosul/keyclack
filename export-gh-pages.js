@@ -12,21 +12,21 @@ const soundpacks = require('./data/soundpacks');
 const themes = require('./data/themes');
 const { guides, blogPosts } = require('./data/content');
 
-const REPO_NAME = 'mechvibes';
+const REPO_NAME = 'keyclack';
 const BASE_PATH = '/' + REPO_NAME;
 
 function buildPages(isGhPages = false) {
   const prefix = isGhPages ? BASE_PATH : '';
 
   const pages = [
-    { dir: '.', html: renderHome(), title: 'Mechvibes - Personalize your typing experience with custom sounds', nav: 'home' },
-    { dir: 'download', html: renderDownload(), title: 'Download Mechvibes for Windows, Mac & Linux', nav: 'download' },
-    { dir: 'sound-packs', html: renderSoundpacks(soundpacks), title: 'Sound Packs Library - Mechvibes', nav: 'sound-packs' },
-    { dir: 'themes', html: renderThemes(themes), title: 'Themes Gallery & Customizer - Mechvibes', nav: 'themes' },
-    { dir: 'guides', html: renderGuidesList(guides), title: 'Guides & Documentation - Mechvibes', nav: 'guides' },
-    { dir: 'blog', html: renderBlogList(blogPosts), title: 'Mechvibes Blog & News', nav: 'blog' },
-    { dir: 'privacy', html: renderLegal({ title: 'Privacy Policy', content: '<p>Mechvibes respects your privacy with an offline-first architecture.</p>' }), title: 'Privacy Policy - Mechvibes', nav: '' },
-    { dir: 'terms', html: renderLegal({ title: 'Terms of Service', content: '<p>Mechvibes is free software licensed under the MIT License.</p>' }), title: 'Terms of Service - Mechvibes', nav: '' }
+    { dir: '.', html: renderHome(), title: 'KeyClack - Authentic Mechanical Keyboard Acoustics', nav: 'home' },
+    { dir: 'download', html: renderDownload(), title: 'Download KeyClack for Linux, Windows & macOS', nav: 'download' },
+    { dir: 'sound-packs', html: renderSoundpacks(soundpacks), title: 'Sound Library - KeyClack', nav: 'sound-packs' },
+    { dir: 'themes', html: renderThemes(themes), title: 'Themes Gallery & Customizer - KeyClack', nav: 'themes' },
+    { dir: 'guides', html: renderGuidesList(guides), title: 'Guides & Documentation - KeyClack', nav: 'guides' },
+    { dir: 'blog', html: renderBlogList(blogPosts), title: 'KeyClack Blog & News', nav: 'blog' },
+    { dir: 'privacy', html: renderLegal({ title: 'Privacy Policy', content: '<p>KeyClack respects your privacy with a 100% offline-first architecture.</p>' }), title: 'Privacy Policy - KeyClack', nav: '' },
+    { dir: 'terms', html: renderLegal({ title: 'Terms of Service', content: '<p>KeyClack is free software licensed under the MIT License.</p>' }), title: 'Terms of Service - KeyClack', nav: '' }
   ];
 
   // Subguides
@@ -34,7 +34,7 @@ function buildPages(isGhPages = false) {
     pages.push({
       dir: `guides/${g.slug}`,
       html: renderGuideDetail(g),
-      title: `${g.title} - Mechvibes Guides`,
+      title: `${g.title} - KeyClack Guides`,
       nav: 'guides'
     });
   }
@@ -44,7 +44,7 @@ function buildPages(isGhPages = false) {
     pages.push({
       dir: `blog/${p.slug}`,
       html: renderBlogPost(p),
-      title: `${p.title} - Mechvibes Blog`,
+      title: `${p.title} - KeyClack Blog`,
       nav: 'blog'
     });
   }
@@ -62,7 +62,7 @@ function buildPages(isGhPages = false) {
     });
 
     if (isGhPages) {
-      // Fix links and asset paths for GitHub Pages subpath /mechvibes/
+      // Fix links and asset paths for GitHub Pages subpath /keyclack/
       fullHtml = fullHtml.replace(/href="\/(download|sound-packs|themes|guides|blog|privacy|terms|login|favicon|logo)/g, `href="${prefix}/$1`);
       fullHtml = fullHtml.replace(/href="\/(css)/g, `href="${prefix}/$1`);
       fullHtml = fullHtml.replace(/src="\/(css|media|screens|logo|icon|apple-icon|soundpacks|mood|blog)/g, `src="${prefix}/$1`);
@@ -76,7 +76,7 @@ function buildPages(isGhPages = false) {
   fs.writeFileSync(path.join(outBase, '.nojekyll'), '');
   // Create 404.html for GitHub Pages SPA routing fallback
   const notFoundHtml = renderLayout({
-    title: 'Page Not Found - Mechvibes',
+    title: 'Page Not Found - KeyClack',
     body: `<div class="py-28 text-center space-y-4 max-w-md mx-auto">
       <h1 class="text-5xl font-black text-primary">404</h1>
       <h2 class="text-2xl font-bold">Page Not Found</h2>

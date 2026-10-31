@@ -20,8 +20,8 @@ function renderAuth({ isLogin = true }) {
   <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
     <div class="w-full max-w-md bg-base-100 rounded-3xl border border-base-300 p-8 shadow-2xl space-y-6">
       <div class="text-center space-y-2">
-        <img src="/logo.svg" alt="Mechvibes" class="w-10 h-10 mx-auto"/>
-        <h2 class="text-2xl font-bold">${isLogin ? 'Sign in to Mechvibes' : 'Create an Account'}</h2>
+        <img src="/logo.svg" alt="KeyClack" class="w-10 h-10 mx-auto"/>
+        <h2 class="text-2xl font-bold">${isLogin ? 'Sign in to KeyClack' : 'Create an Account'}</h2>
         <p class="text-xs text-base-content/60">${isLogin ? 'Access your uploaded sound packs and cloud sync.' : 'Join the community and publish your own sound packs.'}</p>
       </div>
 

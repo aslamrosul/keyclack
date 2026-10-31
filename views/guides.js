@@ -5,7 +5,7 @@ function renderGuidesList(guidesList) {
       <div class="text-center space-y-4 max-w-2xl mx-auto">
         <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Guides & Documentation</h1>
         <p class="text-sm sm:text-base text-base-content/70">
-          Everything you need to set up, calibrate, and customize Mechvibes like a pro.
+          Everything you need to set up, calibrate, and customize KeyClack like a pro.
         </p>
       </div>
 
@@ -55,7 +55,7 @@ function renderGuideDetail(g) {
 
       <div class="pt-8 border-t border-base-300 flex justify-between items-center">
         <a href="/guides" class="btn btn-sm btn-ghost gap-2">← Back to Guides</a>
-        <a href="/download" class="btn btn-sm btn-primary rounded-xl">Download Mechvibes</a>
+        <a href="/download" class="btn btn-sm btn-primary rounded-xl">Download KeyClack</a>
       </div>
     </div>
   </section>

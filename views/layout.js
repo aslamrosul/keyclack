@@ -4,10 +4,10 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>${title || 'Mechvibes - Personalize your typing experience with custom sounds'}</title>
-  <meta name="description" content="${description || 'Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects.'}"/>
-  <meta property="og:title" content="${title || 'Mechvibes'}"/>
-  <meta property="og:description" content="${description || 'Personalize your typing experience with custom sounds'}"/>
+  <title>${title || 'KeyClack - Authentic Mechanical Keyboard Acoustics'}</title>
+  <meta name="description" content="${description || 'Authentic mechanical keyboard acoustics as you type. Add tactile auditory feedback to every keystroke with KeyClack. Zero latency, rich sound library, and theme customization.'}"/>
+  <meta property="og:title" content="${title || 'KeyClack - Authentic Mechanical Keyboard Acoustics'}"/>
+  <meta property="og:description" content="${description || 'Authentic mechanical keyboard acoustics as you type with KeyClack.'}"/>
   <meta property="og:image" content="/screens/ss1.png"/>
   <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
   <link rel="apple-touch-icon" href="/apple-icon.png"/>
@@ -42,20 +42,17 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
     <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
       <div class="flex shrink-0 items-center">
         <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
-          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/logo.svg"/>
-          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+          <img alt="KeyClack Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">KeyClack</span>
         </a>
       </div>
 
       <div class="hidden md:flex items-center space-x-1">
         <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'download' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/download">Download</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'sound-packs' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'sound-packs' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/sound-packs">Sound Library</a>
         <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'themes' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/themes">Themes</a>
         <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'guides' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/guides">Guides</a>
         <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'blog' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/blog">Blog</a>
-        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
-          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
-        </span>
       </div>
 
       <div class="flex items-center gap-2">
@@ -96,43 +93,44 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
     <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
       <div class="col-span-2 space-y-4">
         <div class="flex items-center space-x-2.5">
-          <img src="/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
-          <span class="font-bold text-lg">Mechvibes</span>
+          <img src="/logo.svg" alt="KeyClack" class="h-7 w-7"/>
+          <span class="font-bold text-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">KeyClack</span>
         </div>
         <p class="text-sm text-base-content/60 max-w-sm">
-          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+          High performance, ultra low-latency mechanical keyboard audio companion. Bringing authentic tactile auditory acoustics to every keystroke across Linux, Windows, and macOS.
         </p>
         <div class="flex gap-4 text-xs text-base-content/50 pt-2">
-          <span>Version 3.3.0</span>
+          <span>v3.3.0 Rebrand</span>
           <span>•</span>
           <span>MIT Licensed</span>
+          <span>•</span>
+          <span>100% Offline-First</span>
         </div>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/download" class="hover:text-primary transition-colors">Download App</a></li>
           <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
-          <li><a href="/themes" class="hover:text-primary transition-colors">Themes</a></li>
-          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+          <li><a href="/themes" class="hover:text-primary transition-colors">Themes Gallery</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
-          <li><a href="/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/guides" class="hover:text-primary transition-colors">User Guides</a></li>
+          <li><a href="/blog" class="hover:text-primary transition-colors">Articles & Blog</a></li>
           <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
-          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+          <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Source</a></li>
           <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
           <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
         </ul>
@@ -140,10 +138,9 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
     </div>
 
     <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
-      <p>© ${new Date().getFullYear()} Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <p>© ${new Date().getFullYear()} KeyClack. Crafted with open-source love for typists worldwide.</p>
       <div class="flex items-center gap-4">
-        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
-        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-base-content">GitHub (aslamrosul/keyclack)</a>
         <a href="/download" class="hover:text-base-content">Releases</a>
       </div>
     </div>
@@ -154,13 +151,14 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
     (function() {
       // Dynamic base URL for GitHub Pages
       const isGhPages = window.location.hostname.includes('github.io');
-      window.__MECHVIBES_BASE__ = isGhPages ? '/mechvibes' : '';
+      window.__KEYCLACK_BASE__ = isGhPages ? '/keyclack' : '';
+      window.__MECHVIBES_BASE__ = window.__KEYCLACK_BASE__; // Backward compatibility
 
       // Audio engine with Web Audio API
       let audioCtx = null;
       let soundEnabled = true;
       let activeBuffer = null;
-      let soundpackUrl = (window.__MECHVIBES_BASE__ || '') + '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let soundpackUrl = (window.__KEYCLACK_BASE__ || '') + '/soundpacks/keyboard/eg-oreo/oreo.ogg';
       let volumeLevel = 0.8;
 
       function initAudio() {
@@ -175,8 +173,8 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
       }
 
       function loadSoundpack(url) {
-        if (window.__MECHVIBES_BASE__ && url.startsWith('/') && !url.startsWith(window.__MECHVIBES_BASE__)) {
-          url = window.__MECHVIBES_BASE__ + url;
+        if (window.__KEYCLACK_BASE__ && url.startsWith('/') && !url.startsWith(window.__KEYCLACK_BASE__)) {
+          url = window.__KEYCLACK_BASE__ + url;
         }
         soundpackUrl = url;
         fetch(url)
@@ -184,9 +182,9 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
           .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
           .then(decoded => {
             activeBuffer = decoded;
-            console.log('[Mechvibes Web] Soundpack loaded:', url);
+            console.log('[KeyClack Web] Soundpack loaded:', url);
           })
-          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+          .catch(err => console.warn('[KeyClack Web] Audio load error:', err));
       }
 
       function playKeyClick(randomPitch = true) {
@@ -220,7 +218,7 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
       }
 
       // Expose globally
-      window.mechvibes = {
+      window.keyclack = {
         playKey: playKeyClick,
         setSoundpack: (url) => {
           initAudio();
@@ -234,18 +232,18 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
         },
         setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
       };
+      window.mechvibes = window.keyclack; // Alias
 
       // Toggle button event
       const toggleBtn = document.getElementById('webAudioToggle');
       if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
-          window.mechvibes.toggleSound();
+          window.keyclack.toggleSound();
         });
       }
 
       // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
       window.addEventListener('keydown', (e) => {
-        // Avoid double triggering if active target is not ignored
         if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
           playKeyClick();
         }

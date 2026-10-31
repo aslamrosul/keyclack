@@ -97,23 +97,23 @@ app.get('/api/releases/latest', (req, res) => {
   res.json({
     version: '3.3.0',
     tag_name: 'v3.3.0',
-    name: 'Mechvibes v3.3.0',
+    name: 'KeyClack v3.3.0',
     published_at: '2026-10-31T04:42:05Z',
-    body: 'Mechvibes 3.3.0 brings full Linux evdev support, lower audio latency via Symphonia, new Topre and Oreo sound packs, and live theme customization.',
+    body: 'KeyClack 3.3.0 brings full Linux evdev support, lower audio latency via Symphonia, new Topre and Oreo sound packs, and live theme customization.',
     assets: [
       {
-        name: 'mechvibes-3.3.0-x86_64.AppImage',
-        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-x86_64.AppImage',
+        name: 'keyclack-3.3.0-x86_64.AppImage',
+        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/keyclack-3.3.0-x86_64.AppImage',
         size: 52333048
       },
       {
-        name: 'Mechvibes-3.3.0-Setup-x64.exe',
-        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/Mechvibes-3.3.0-Setup-x64.exe',
+        name: 'KeyClack-3.3.0-Setup-x64.exe',
+        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/KeyClack-3.3.0-Setup-x64.exe',
         size: 23150200
       },
       {
-        name: 'mechvibes-3.3.0-macos-arm64.dmg',
-        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/mechvibes-3.3.0-macos-arm64.dmg',
+        name: 'keyclack-3.3.0-macos-arm64.dmg',
+        browser_download_url: 'https://github.com/hainguyents13/mechvibes/releases/download/v3.3.0/keyclack-3.3.0-macos-arm64.dmg',
         size: 34500120
       }
     ]
@@ -122,7 +122,7 @@ app.get('/api/releases/latest', (req, res) => {
 
 // POST /api/telemetry - Telemetry receiver
 app.post('/api/telemetry', (req, res) => {
-  // Telemetry dummy endpoint matching Mechvibes app telemetry
+  // Telemetry dummy endpoint matching KeyClack app telemetry
   res.status(200).json({ status: 'ok', received: true });
 });
 
@@ -155,8 +155,8 @@ app.get('/api/health', (req, res) => {
 // Home Page
 app.get('/', (req, res) => {
   res.send(renderLayout({
-    title: 'Mechvibes - Personalize your typing experience with custom sounds',
-    description: 'Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects. Free sound customization tool.',
+    title: 'KeyClack - Authentic Mechanical Keyboard Acoustics',
+    description: 'Make every keystroke unique with KeyClack. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects. Free sound customization tool.',
     activeNav: 'home',
     body: renderHome()
   }));
@@ -165,8 +165,8 @@ app.get('/', (req, res) => {
 // Download Page
 app.get('/download', (req, res) => {
   res.send(renderLayout({
-    title: 'Download Mechvibes for Windows, Mac & Linux',
-    description: 'Download Mechvibes 3.3.0. Universal packages for 64-bit Windows, Apple Silicon macOS, and Linux AppImage/.deb.',
+    title: 'Download KeyClack for Linux, Windows & macOS',
+    description: 'Download KeyClack 3.3.0. Universal packages for 64-bit Windows, Apple Silicon macOS, and Linux AppImage/.deb.',
     activeNav: 'download',
     body: renderDownload()
   }));
@@ -193,8 +193,8 @@ app.get('/sound-packs', (req, res) => {
   }
 
   res.send(renderLayout({
-    title: 'Sound Packs Library - Mechvibes',
-    description: 'Browse, preview, and download mechanical switch sound packs for Mechvibes.',
+    title: 'Sound Library - KeyClack',
+    description: 'Browse, preview, and download mechanical switch sound packs for KeyClack.',
     activeNav: 'sound-packs',
     body: renderSoundpacks(results, req.query)
   }));
@@ -205,12 +205,12 @@ app.get('/sound-packs/:slug', (req, res) => {
   const sp = soundpacks.find(s => s.slug === req.params.slug || s.id === req.params.slug);
   if (!sp) {
     return res.status(404).send(renderLayout({
-      title: 'Sound Pack Not Found - Mechvibes',
+      title: 'Sound Pack Not Found - KeyClack',
       body: '<div class="py-24 text-center"><h1 class="text-3xl font-bold">Sound Pack Not Found</h1><a href="/sound-packs" class="btn btn-primary mt-4">Browse Library</a></div>'
     }));
   }
   res.send(renderLayout({
-    title: `${sp.title} - Mechvibes Sound Packs`,
+    title: `${sp.title} - KeyClack Sound Packs`,
     description: sp.description,
     activeNav: 'sound-packs',
     body: renderSoundpackDetail(sp)
@@ -220,8 +220,8 @@ app.get('/sound-packs/:slug', (req, res) => {
 // Themes Page
 app.get('/themes', (req, res) => {
   res.send(renderLayout({
-    title: 'Themes Gallery & Customizer - Mechvibes',
-    description: 'Browse and create custom themes for Mechvibes. Export .mvtheme files with real-time UI previews.',
+    title: 'Themes Gallery & Customizer - KeyClack',
+    description: 'Browse and create custom themes for KeyClack. Export .mvtheme files with real-time UI previews.',
     activeNav: 'themes',
     body: renderThemes(themes)
   }));
@@ -230,8 +230,8 @@ app.get('/themes', (req, res) => {
 // Guides Index
 app.get('/guides', (req, res) => {
   res.send(renderLayout({
-    title: 'Guides & Documentation - Mechvibes',
-    description: 'Learn how to install, set up, and get the most out of Mechvibes keyboard sound simulator.',
+    title: 'Guides & Documentation - KeyClack',
+    description: 'Learn how to install, set up, and get the most out of KeyClack keyboard sound simulator.',
     activeNav: 'guides',
     body: renderGuidesList(guides)
   }));
@@ -244,7 +244,7 @@ app.get('/guides/:slug', (req, res) => {
     return res.status(404).redirect('/guides');
   }
   res.send(renderLayout({
-    title: `${guide.title} - Mechvibes Guides`,
+    title: `${guide.title} - KeyClack Guides`,
     description: guide.description,
     activeNav: 'guides',
     body: renderGuideDetail(guide)
@@ -254,8 +254,8 @@ app.get('/guides/:slug', (req, res) => {
 // Blog Index
 app.get('/blog', (req, res) => {
   res.send(renderLayout({
-    title: 'Blog - Mechvibes',
-    description: 'Articles, updates, troubleshooting guides, and tutorials for Mechvibes.',
+    title: 'Blog - KeyClack',
+    description: 'Articles, updates, troubleshooting guides, and tutorials for KeyClack.',
     activeNav: 'blog',
     body: renderBlogList(blogPosts)
   }));
@@ -268,7 +268,7 @@ app.get('/blog/:slug', (req, res) => {
     return res.status(404).redirect('/blog');
   }
   res.send(renderLayout({
-    title: `${post.title} - Mechvibes Blog`,
+    title: `${post.title} - KeyClack Blog`,
     description: post.summary,
     activeNav: 'blog',
     body: renderBlogPost(post)
@@ -278,21 +278,21 @@ app.get('/blog/:slug', (req, res) => {
 // Auth Pages
 app.get('/login', (req, res) => {
   res.send(renderLayout({
-    title: 'Sign In - Mechvibes',
+    title: 'Sign In - KeyClack',
     body: renderAuth({ isLogin: true })
   }));
 });
 
 app.post('/login', (req, res) => {
   res.send(renderLayout({
-    title: 'Signed In - Mechvibes',
-    body: '<div class="py-24 text-center space-y-4"><h2 class="text-2xl font-bold">Welcome Back!</h2><p class="text-sm opacity-70">Successfully signed in to Mechvibes.</p><a href="/" class="btn btn-primary mt-4">Go Home</a></div>'
+    title: 'Signed In - KeyClack',
+    body: '<div class="py-24 text-center space-y-4"><h2 class="text-2xl font-bold">Welcome Back!</h2><p class="text-sm opacity-70">Successfully signed in to KeyClack.</p><a href="/" class="btn btn-primary mt-4">Go Home</a></div>'
   }));
 });
 
 app.get('/register', (req, res) => {
   res.send(renderLayout({
-    title: 'Register - Mechvibes',
+    title: 'Register - KeyClack',
     body: renderAuth({ isLogin: false })
   }));
 });
@@ -300,16 +300,16 @@ app.get('/register', (req, res) => {
 // Legal Pages
 app.get('/privacy', (req, res) => {
   res.send(renderLayout({
-    title: 'Privacy Policy - Mechvibes',
+    title: 'Privacy Policy - KeyClack',
     body: renderLegal({
       title: 'Privacy Policy',
       date: 'October 31, 2026',
       content: `
-        <p>Mechvibes respects your privacy. Mechvibes is designed with an anti-telemetry, offline-first architecture.</p>
+        <p>KeyClack respects your privacy. KeyClack is designed with an anti-telemetry, offline-first architecture.</p>
         <h3>No Keystroke Logging</h3>
-        <p>Mechvibes never collects, logs, stores, or transmits your keystrokes, clipboard content, passwords, or typed text. Audio triggers run completely in-memory on your local hardware.</p>
+        <p>KeyClack never collects, logs, stores, or transmits your keystrokes, clipboard content, passwords, or typed text. Audio triggers run completely in-memory on your local hardware.</p>
         <h3>Network Requests</h3>
-        <p>The only network requests made by Mechvibes are:</p>
+        <p>The only network requests made by KeyClack are:</p>
         <ul>
           <li>Checking for software updates via GitHub Releases API or <code>/api/releases/latest</code></li>
           <li>Downloading sound packs you explicitly request from the Sound Pack Library</li>
@@ -321,13 +321,13 @@ app.get('/privacy', (req, res) => {
 
 app.get('/terms', (req, res) => {
   res.send(renderLayout({
-    title: 'Terms of Service - Mechvibes',
+    title: 'Terms of Service - KeyClack',
     body: renderLegal({
       title: 'Terms of Service',
       date: 'October 31, 2026',
       content: `
-        <p>Mechvibes is free software licensed under the MIT License.</p>
-        <p>You are free to use Mechvibes for personal, educational, and commercial purposes.</p>
+        <p>KeyClack is free software licensed under the MIT License.</p>
+        <p>You are free to use KeyClack for personal, educational, and commercial purposes.</p>
       `
     })
   }));
@@ -335,5 +335,5 @@ app.get('/terms', (req, res) => {
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Mechvibes Clone Web & API Server running at http://localhost:${PORT}`);
+  console.log(`🚀 KeyClack Web & API Server running at http://localhost:${PORT}`);
 });
