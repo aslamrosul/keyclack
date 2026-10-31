@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sound Packs - Mechvibes</title>
+  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
+  <meta property="og:title" content="Sound Packs - Mechvibes"/>
+  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <meta property="og:image" content="/screens/ss1.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/theme.css"/>
+  <style>
+    /* Smooth interactive typography & ambient highlights */
+    body {
+      background-color: var(--color-base-100, #121316);
+      color: var(--color-base-content, #f4f4f5);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .keyboard-key {
+      transition: all 0.08s ease-in-out;
+      user-select: none;
+    }
+    .keyboard-key:active, .keyboard-key.active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(1.2);
+    }
+    /* Waveform canvas */
+    .waveform-bar {
+      transition: height 0.1s ease;
+    }
+  </style>
+  
+</head>
+<body class="MOT0tq_className antialiased min-h-screen flex flex-col bg-base-100 text-base-content selection:bg-primary/20">
+
+  <!-- Top Sticky Navigation Pill -->
+  <header class="sticky top-4 z-50 w-full px-4">
+    <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
+      <div class="flex shrink-0 items-center">
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
+          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-1">
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/blog">Blog</a>
+        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Interactive Web Sound Trigger Pill -->
+        <button id="webAudioToggle" class="btn btn-xs btn-outline btn-primary rounded-full gap-1.5 px-3">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span id="audioToggleLabel">Sound: ON</span>
+        </button>
+
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/login">Sign In</a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/blog">Blog</a>
+      <div class="divider my-1"></div>
+      <a class="btn btn-sm btn-neutral w-full" href="/login">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="flex-grow">
+    
+  <section class="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto space-y-10">
+      
+      <!-- Page Header -->
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Sound Packs Library</h1>
+        <p class="text-sm sm:text-base text-base-content/70">
+          Discover hundreds of custom mechanical switch soundpacks. Preview audio in your browser and install directly into Mechvibes.
+        </p>
+      </div>
+
+      <!-- Search & Filters Bar -->
+      <div class="bg-base-200/60 p-4 sm:p-6 rounded-3xl border border-base-300 space-y-4">
+        
+        <form method="GET" action="/sound-packs" class="flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" name="q" value="" placeholder="Search soundpacks by switch name, creator, or sound profile..." class="input input-sm sm:input-md input-bordered w-full pl-10 rounded-2xl bg-base-100 text-sm"/>
+          </div>
+
+          <div class="flex gap-2">
+            <select name="category" onchange="this.form.submit()" class="select select-sm sm:select-md select-bordered rounded-2xl bg-base-100 text-xs sm:text-sm">
+              <option value="all" selected>All Categories</option>
+              <option value="keyboard" >Keyboard</option>
+              <option value="mouse" >Mouse</option>
+            </select>
+
+            <button type="submit" class="btn btn-sm sm:btn-md btn-primary rounded-2xl px-5">Filter</button>
+          </div>
+        </form>
+
+        <!-- Quick Tags -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-base-300/60 text-xs">
+          <span class="text-base-content/50 font-medium">Popular Profiles:</span>
+          
+            <a href="/sound-packs?tag=all" class="badge badge-primary cursor-pointer transition-all">
+              #all
+            </a>
+          
+            <a href="/sound-packs?tag=thocky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+              #thocky
+            </a>
+          
+            <a href="/sound-packs?tag=creamy" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+              #creamy
+            </a>
+          
+            <a href="/sound-packs?tag=tactile" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+              #tactile
+            </a>
+          
+            <a href="/sound-packs?tag=linear" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+              #linear
+            </a>
+          
+            <a href="/sound-packs?tag=clicky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+              #clicky
+            </a>
+          
+        </div>
+
+      </div>
+
+      <!-- Soundpacks Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="EG Oreo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/eg-oreo/oreo.ogg', 'EG Oreo')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Tactile (67g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/eg-oreo">EG Oreo</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Smooth tactile switch sound with deep, rounded thock and satisfying bottom-out acoustics.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#tactile</span><span class="badge badge-xs badge-ghost text-[10px]">#creamy</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.9
+                  </span>
+                  <span>142.5k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-eg-oreo" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/eg-oreo/oreo.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-black-abs/black.jpg" alt="Cherry MX Black - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-black-abs/sound.ogg', 'Cherry MX Black - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Linear (60g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-black-abs">Cherry MX Black - ABS Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Classic heavy linear switch acoustic profile paired with vintage ABS keycaps.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#linear</span><span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#classic</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>98.2k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-black-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-black-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-black-pbt/black.jpg" alt="Cherry MX Black - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-black-pbt/sound.ogg', 'Cherry MX Black - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Linear (60g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-black-pbt">Cherry MX Black - PBT Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Denser, deeper acoustics from thick PBT keycaps on iconic Cherry MX Black switches.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#linear</span><span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#deep</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>85.4k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-black-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-black-pbt/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-blue-abs/blue.jpg" alt="Cherry MX Blue - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-blue-abs/sound.ogg', 'Cherry MX Blue - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Clicky (50g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-blue-abs">Cherry MX Blue - ABS Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Crisp, tactile click mechanism providing instant feedback with every keystroke.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#clicky</span><span class="badge badge-xs badge-ghost text-[10px]">#clacky</span><span class="badge badge-xs badge-ghost text-[10px]">#loud</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.7
+                  </span>
+                  <span>112.0k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-blue-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-blue-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-blue-pbt/blue.jpg" alt="Cherry MX Blue - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-blue-pbt/sound.ogg', 'Cherry MX Blue - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Clicky (50g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-blue-pbt">Cherry MX Blue - PBT Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Defined click with solid bottom-out tone damped by textured PBT caps.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#clicky</span><span class="badge badge-xs badge-ghost text-[10px]">#clacky</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.6
+                  </span>
+                  <span>73.1k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-blue-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-blue-pbt/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-brown-abs/brown.jpg" alt="Cherry MX Brown - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-brown-abs/sound.ogg', 'Cherry MX Brown - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Tactile (45g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-brown-abs">Cherry MX Brown - ABS Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Subtle tactile bump sound profile suitable for work and gaming alike.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#tactile</span><span class="badge badge-xs badge-ghost text-[10px]">#gentle</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.6
+                  </span>
+                  <span>89.6k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-brown-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-brown-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-brown-pbt/brown.jpg" alt="Cherry MX Brown - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-brown-pbt/sound.ogg', 'Cherry MX Brown - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Tactile (45g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-brown-pbt">Cherry MX Brown - PBT Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Mellow tactile response with enhanced low-frequency pitch from PBT keycaps.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#tactile</span><span class="badge badge-xs badge-ghost text-[10px]">#gentle</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.6
+                  </span>
+                  <span>64.9k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-brown-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-brown-pbt/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Cherry MX Red - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Cherry MX Red - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Linear (45g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/cherrymx-red-abs">Cherry MX Red - ABS Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Lightweight linear action preferred by fast typists and competitive gamers.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#linear</span><span class="badge badge-xs badge-ghost text-[10px]">#smooth</span><span class="badge badge-xs badge-ghost text-[10px]">#game</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>105.3k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-cherrymx-red-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-red-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/eg-crystal-purple/purple.jpg" alt="EG Crystal Purple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/eg-crystal-purple/purple.ogg', 'EG Crystal Purple')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Tactile (62g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/eg-crystal-purple">EG Crystal Purple</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Sharp tactile feedback with crystalline clack acoustics.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#tactile</span><span class="badge badge-xs badge-ghost text-[10px]">#crisp</span><span class="badge badge-xs badge-ghost text-[10px]">#clacky</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>78.2k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-eg-crystal-purple" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/eg-crystal-purple/purple.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Topre Purple Hybrid - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Topre Purple Hybrid - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Electrostatic Capacitive (45g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/topre-purple-hybrid-pbt">Topre Purple Hybrid - PBT Keycaps</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Legendary Topre dome “thock” with muted upstroke silence rings and premium PBT feel.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#electrostatic</span><span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#creamy</span><span class="badge badge-xs badge-ghost text-[10px]">#deep</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.95
+                  </span>
+                  <span>131.8k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/keyboard-topre-purple-hybrid-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/screens/ss1.png" alt="Ping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">mouse</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/mouse/ping/ping.mp3', 'Ping')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Microswitch</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/mouse-ping">Ping</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Crisp, high-definition optical mouse microswitch acoustic feedback.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#mouse</span><span class="badge badge-xs badge-ghost text-[10px]">#click</span><span class="badge badge-xs badge-ghost text-[10px]">#crisp</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.7
+                  </span>
+                  <span>42.1k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mouse-ping" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/mouse/ping/ping.mp3" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/screens/ss2.png" alt="Wooden Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">mouse</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/mouse/wooden/wooden.mp3', 'Wooden Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Acoustic Wood</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/mouse-wooden">Wooden Mouse</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Warm, organic woodblock click tones for soothing mouse interaction.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#mouse</span><span class="badge badge-xs badge-ghost text-[10px]">#wooden</span><span class="badge badge-xs badge-ghost text-[10px]">#organic</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>29.4k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mouse-wooden" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/mouse/wooden/wooden.mp3" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/screens/ss3.png" alt="Vibrate Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">mouse</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/mouse/vibrate/vibrate.mp3', 'Vibrate Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Haptic Click</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/mouse-vibrate">Vibrate Mouse</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Low-frequency resonant tactile impulse simulation for clicks.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#mouse</span><span class="badge badge-xs badge-ghost text-[10px]">#haptic</span><span class="badge badge-xs badge-ghost text-[10px]">#deep</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.5
+                  </span>
+                  <span>21.0k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mouse-vibrate" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/mouse/vibrate/vibrate.mp3" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/screens/ss1.png" alt="Chat Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-primary badge-sm font-semibold">Official</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">mouse</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/mouse/chat/chat.mp3', 'Chat Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Soft Switch</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/mouse-chat">Chat Mouse</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Quiet bubble-like click simulation for stealthy late-night browsing.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#mouse</span><span class="badge badge-xs badge-ghost text-[10px]">#gentle</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.6
+                  </span>
+                  <span>18.5k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mouse-chat" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/mouse/chat/chat.mp3" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="Creamy Thingy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/eg-oreo/oreo.ogg', 'Creamy Thingy')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Lubed Linear</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/creamy-thingy">Creamy Thingy</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">yozyrexx</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Deeply lubed, buttery smooth keyboard sound profile with ultra-marbly acoustics.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#creamy</span><span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#lubed</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.9
+                  </span>
+                  <span>88.4k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-7b6a156a19a249d9b8002ab918649c2d" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/eg-oreo/oreo.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Wooting 60HE v2 (L45 Switches)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Wooting 60HE v2 (L45 Switches)')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Hall Effect Magnetic</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/wooting-60he-v2">Wooting 60HE v2 (L45 Switches)</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">LekkerLab</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Accurate acoustic capture of the Wooting 60HE rapid trigger analog gaming keyboard.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#hall-effect</span><span class="badge badge-xs badge-ghost text-[10px]">#linear</span><span class="badge badge-xs badge-ghost text-[10px]">#game</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.9
+                  </span>
+                  <span>64.2k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-wooting-60he-v2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-red-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Gateron Ink Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Gateron Ink Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Linear (45g)</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/gateron-ink-red">Gateron Ink Red</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">SwitchesDaily</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Smoky transparent housing sound signature with signature deep clack upon bottom out.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#linear</span><span class="badge badge-xs badge-ghost text-[10px]">#smooth</span><span class="badge badge-xs badge-ghost text-[10px]">#creamy</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.85
+                  </span>
+                  <span>53.7k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-gateron-ink-red" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-red-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Akko TAC75 HE v2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Akko TAC75 HE v2')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Magnetic Switch</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/akko-tac75-he-2">Akko TAC75 HE v2</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">AkkoLover</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Gasket-mounted aluminum plate sound profile with foam dampening.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#hall-effect</span><span class="badge badge-xs badge-ghost text-[10px]">#creamy</span><span class="badge badge-xs badge-ghost text-[10px]">#thocky</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.8
+                  </span>
+                  <span>39.8k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-akko-tac75-he-2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="ASMR Programming Soundpack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/eg-oreo/oreo.ogg', 'ASMR Programming Soundpack')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">Custom ASMR Switch</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/asmr-programming-soundpack">ASMR Programming Soundpack</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">CodeVibe</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Designed specifically for long coding sessions with non-fatiguing relaxing frequencies.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#thocky</span><span class="badge badge-xs badge-ghost text-[10px]">#creamy</span><span class="badge badge-xs badge-ghost text-[10px]">#fun</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.9
+                  </span>
+                  <span>47.2k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-asmr-programming-soundpack" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/eg-oreo/oreo.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+          <div class="bg-base-100 rounded-3xl border border-base-300 overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-xl transition-all duration-300 group">
+            
+            <!-- Card Image & Header -->
+            <div class="relative h-44 bg-base-300 overflow-hidden">
+              <img src="/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="HyperX Alloy Origins Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex gap-1.5">
+                <span class="badge badge-neutral badge-sm">Community</span>
+                <span class="badge badge-outline badge-sm text-white/90 bg-black/40 backdrop-blur-sm uppercase text-[10px]">keyboard</span>
+              </div>
+
+              <!-- Quick Play Preview Button Overlay -->
+              <button onclick="previewAudio('/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'HyperX Alloy Origins Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-xs opacity-75">HyperX Red Linear</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
+                  <a href="/sound-packs/hyperx-alloy-origins-red-switches">HyperX Alloy Origins Red</a>
+                </h3>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">HyperXGamer</span></p>
+                <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Aluminum chassis resonance combined with responsive linear key actuations.</p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-xs badge-ghost text-[10px]">#game</span><span class="badge badge-xs badge-ghost text-[10px]">#linear</span>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="pt-4 border-t border-base-300/80 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-3 text-xs text-base-content/50">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    4.7
+                  </span>
+                  <span>31.5k DL</span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <a href="mechvibes://install/mv-hyperx-alloy-origins-red-switches" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Install
+                  </a>
+                  <a href="/soundpacks/keyboard/cherrymx-red-abs/sound.ogg" download class="btn btn-xs btn-ghost btn-square" title="Direct download file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sound Preview Toast -->
+  <div id="previewToast" class="fixed bottom-6 right-6 bg-neutral text-neutral-content px-4 py-3 rounded-2xl shadow-2xl border border-neutral-content/20 flex items-center gap-3 z-50 transform translate-y-24 opacity-0 transition-all duration-300">
+    <div class="w-3 h-3 rounded-full bg-primary animate-ping"></div>
+    <div class="text-xs">
+      <div class="font-bold" id="previewTitle">Playing preview</div>
+      <div class="opacity-70">Type anywhere on keyboard to test!</div>
+    </div>
+  </div>
+
+  <script>
+    function previewAudio(soundFile, title) {
+      window.mechvibes.setSoundpack(soundFile);
+      window.mechvibes.playKey();
+
+      const toast = document.getElementById('previewToast');
+      const titleEl = document.getElementById('previewTitle');
+      if (toast && titleEl) {
+        titleEl.textContent = 'Previewing: ' + title;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3500);
+      }
+    }
+  </script>
+  
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="bg-base-200/60 border-t border-base-300/80 py-16 px-6 lg:px-8 mt-20">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <img src="/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
+          <span class="font-bold text-lg">Mechvibes</span>
+        </div>
+        <p class="text-sm text-base-content/60 max-w-sm">
+          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+        </p>
+        <div class="flex gap-4 text-xs text-base-content/50 pt-2">
+          <span>Version 3.3.0</span>
+          <span>•</span>
+          <span>MIT Licensed</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/themes" class="hover:text-primary transition-colors">Themes</a></li>
+          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
+          <li><a href="/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
+      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
+        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="/download" class="hover:text-base-content">Releases</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal In-Browser Web Audio Synthesizer Engine -->
+  <script>
+    (function() {
+      // Audio engine with Web Audio API
+      let audioCtx = null;
+      let soundEnabled = true;
+      let activeBuffer = null;
+      let soundpackUrl = '/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let volumeLevel = 0.8;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          loadSoundpack(soundpackUrl);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function loadSoundpack(url) {
+        soundpackUrl = url;
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
+          .then(decoded => {
+            activeBuffer = decoded;
+            console.log('[Mechvibes Web] Soundpack loaded:', url);
+          })
+          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+      }
+
+      function playKeyClick(randomPitch = true) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!activeBuffer || !audioCtx) return;
+
+        try {
+          const source = audioCtx.createBufferSource();
+          source.buffer = activeBuffer;
+
+          // Randomize slice to give realistic natural typing variation
+          const duration = 0.12; // 120ms click
+          const maxStart = Math.max(0, activeBuffer.duration - duration);
+          const start = Math.random() * maxStart;
+
+          if (randomPitch) {
+            source.playbackRate.value = 0.96 + Math.random() * 0.08;
+          }
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.value = volumeLevel;
+
+          source.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          source.start(0, start, duration);
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      // Expose globally
+      window.mechvibes = {
+        playKey: playKeyClick,
+        setSoundpack: (url) => {
+          initAudio();
+          loadSoundpack(url);
+        },
+        toggleSound: () => {
+          soundEnabled = !soundEnabled;
+          const label = document.getElementById('audioToggleLabel');
+          if (label) label.textContent = 'Sound: ' + (soundEnabled ? 'ON' : 'OFF');
+          return soundEnabled;
+        },
+        setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
+      };
+
+      // Toggle button event
+      const toggleBtn = document.getElementById('webAudioToggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          window.mechvibes.toggleSound();
+        });
+      }
+
+      // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
+      window.addEventListener('keydown', (e) => {
+        // Avoid double triggering if active target is not ignored
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          playKeyClick();
+        }
+      });
+    })();
+  </script>
+  
+</body>
+</html>
