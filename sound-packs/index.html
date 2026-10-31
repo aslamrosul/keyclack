@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Sound Packs Library - Mechvibes</title>
-  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
-  <meta property="og:title" content="Sound Packs Library - Mechvibes"/>
-  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <title>Sound Library - KeyClack</title>
+  <meta name="description" content="Authentic mechanical keyboard acoustics as you type. Add tactile auditory feedback to every keystroke with KeyClack. Zero latency, rich sound library, and theme customization."/>
+  <meta property="og:title" content="Sound Library - KeyClack"/>
+  <meta property="og:description" content="Authentic mechanical keyboard acoustics as you type with KeyClack."/>
   <meta property="og:image" content="/screens/ss1.png"/>
-  <link rel="icon" href="/mechvibes/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="icon" href="/keyclack/favicon.ico" sizes="48x48" type="image/x-icon"/>
   <link rel="apple-touch-icon" href="/apple-icon.png"/>
-  <link rel="stylesheet" href="/mechvibes/css/main.css"/>
-  <link rel="stylesheet" href="/mechvibes/css/theme.css"/>
+  <link rel="stylesheet" href="/keyclack/css/main.css"/>
+  <link rel="stylesheet" href="/keyclack/css/theme.css"/>
   <style>
     /* Smooth interactive typography & ambient highlights */
     body {
@@ -41,20 +41,17 @@
     <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
       <div class="flex shrink-0 items-center">
         <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
-          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/mechvibes/logo.svg"/>
-          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+          <img alt="KeyClack Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="/keyclack/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">KeyClack</span>
         </a>
       </div>
 
       <div class="hidden md:flex items-center space-x-1">
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/download">Download</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/mechvibes/sound-packs">Library</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/themes">Themes</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/guides">Guides</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/blog">Blog</a>
-        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
-          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
-        </span>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/keyclack/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/keyclack/sound-packs">Sound Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/keyclack/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/keyclack/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/keyclack/blog">Blog</a>
       </div>
 
       <div class="flex items-center gap-2">
@@ -64,7 +61,7 @@
           <span id="audioToggleLabel">Sound: ON</span>
         </button>
 
-        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/mechvibes/login">Sign In</a>
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/keyclack/login">Sign In</a>
 
         <!-- Mobile Drawer Toggle -->
         <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
@@ -75,13 +72,13 @@
 
     <!-- Mobile Menu dropdown -->
     <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/download">Download</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/sound-packs">Sound Pack Library</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/themes">Themes Gallery</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/guides">User Guides</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/blog">Blog</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/keyclack/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/keyclack/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/keyclack/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/keyclack/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/keyclack/blog">Blog</a>
       <div class="divider my-1"></div>
-      <a class="btn btn-sm btn-neutral w-full" href="/mechvibes/login">Sign In</a>
+      <a class="btn btn-sm btn-neutral w-full" href="/keyclack/login">Sign In</a>
     </div>
   </header>
 
@@ -95,7 +92,7 @@
       <div class="text-center space-y-4 max-w-2xl mx-auto">
         <h1 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight">Sound Packs Library</h1>
         <p class="text-sm sm:text-base text-base-content/70">
-          Discover hundreds of custom mechanical switch soundpacks. Preview audio in your browser and install directly into Mechvibes.
+          Discover hundreds of custom mechanical switch soundpacks. Preview audio in your browser and install directly into KeyClack.
         </p>
       </div>
 
@@ -123,27 +120,27 @@
         <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-base-300/60 text-xs">
           <span class="text-base-content/50 font-medium">Popular Profiles:</span>
           
-            <a href="/mechvibes/sound-packs?tag=all" class="badge badge-primary cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=all" class="badge badge-primary cursor-pointer transition-all">
               #all
             </a>
           
-            <a href="/mechvibes/sound-packs?tag=thocky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=thocky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
               #thocky
             </a>
           
-            <a href="/mechvibes/sound-packs?tag=creamy" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=creamy" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
               #creamy
             </a>
           
-            <a href="/mechvibes/sound-packs?tag=tactile" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=tactile" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
               #tactile
             </a>
           
-            <a href="/mechvibes/sound-packs?tag=linear" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=linear" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
               #linear
             </a>
           
-            <a href="/mechvibes/sound-packs?tag=clicky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
+            <a href="/keyclack/sound-packs?tag=clicky" class="badge badge-ghost hover:badge-neutral cursor-pointer transition-all">
               #clicky
             </a>
           
@@ -158,7 +155,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="EG Oreo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="EG Oreo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -168,7 +165,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/eg-oreo/oreo.ogg', 'EG Oreo')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/eg-oreo/oreo.ogg', 'EG Oreo')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -181,9 +178,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/eg-oreo">EG Oreo</a>
+                  <a href="/keyclack/sound-packs/eg-oreo">EG Oreo</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Smooth tactile switch sound with deep, rounded thock and satisfying bottom-out acoustics.</p>
               </div>
 
@@ -203,7 +200,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-eg-oreo" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-eg-oreo" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -221,7 +218,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-black-abs/black.jpg" alt="Cherry MX Black - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-black-abs/black.jpg" alt="Cherry MX Black - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -231,7 +228,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-black-abs/sound.ogg', 'Cherry MX Black - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-black-abs/sound.ogg', 'Cherry MX Black - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -244,9 +241,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-black-abs">Cherry MX Black - ABS Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-black-abs">Cherry MX Black - ABS Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Classic heavy linear switch acoustic profile paired with vintage ABS keycaps.</p>
               </div>
 
@@ -266,7 +263,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-black-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-black-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -284,7 +281,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-black-pbt/black.jpg" alt="Cherry MX Black - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-black-pbt/black.jpg" alt="Cherry MX Black - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -294,7 +291,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-black-pbt/sound.ogg', 'Cherry MX Black - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-black-pbt/sound.ogg', 'Cherry MX Black - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -307,9 +304,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-black-pbt">Cherry MX Black - PBT Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-black-pbt">Cherry MX Black - PBT Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Denser, deeper acoustics from thick PBT keycaps on iconic Cherry MX Black switches.</p>
               </div>
 
@@ -329,7 +326,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-black-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-black-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -347,7 +344,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-blue-abs/blue.jpg" alt="Cherry MX Blue - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-blue-abs/blue.jpg" alt="Cherry MX Blue - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -357,7 +354,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-blue-abs/sound.ogg', 'Cherry MX Blue - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-blue-abs/sound.ogg', 'Cherry MX Blue - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -370,9 +367,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-blue-abs">Cherry MX Blue - ABS Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-blue-abs">Cherry MX Blue - ABS Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Crisp, tactile click mechanism providing instant feedback with every keystroke.</p>
               </div>
 
@@ -392,7 +389,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-blue-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-blue-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -410,7 +407,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-blue-pbt/blue.jpg" alt="Cherry MX Blue - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-blue-pbt/blue.jpg" alt="Cherry MX Blue - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -420,7 +417,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-blue-pbt/sound.ogg', 'Cherry MX Blue - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-blue-pbt/sound.ogg', 'Cherry MX Blue - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -433,9 +430,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-blue-pbt">Cherry MX Blue - PBT Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-blue-pbt">Cherry MX Blue - PBT Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Defined click with solid bottom-out tone damped by textured PBT caps.</p>
               </div>
 
@@ -455,7 +452,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-blue-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-blue-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -473,7 +470,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-brown-abs/brown.jpg" alt="Cherry MX Brown - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-brown-abs/brown.jpg" alt="Cherry MX Brown - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -483,7 +480,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-brown-abs/sound.ogg', 'Cherry MX Brown - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-brown-abs/sound.ogg', 'Cherry MX Brown - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -496,9 +493,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-brown-abs">Cherry MX Brown - ABS Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-brown-abs">Cherry MX Brown - ABS Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Subtle tactile bump sound profile suitable for work and gaming alike.</p>
               </div>
 
@@ -518,7 +515,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-brown-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-brown-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -536,7 +533,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-brown-pbt/brown.jpg" alt="Cherry MX Brown - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-brown-pbt/brown.jpg" alt="Cherry MX Brown - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -546,7 +543,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-brown-pbt/sound.ogg', 'Cherry MX Brown - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-brown-pbt/sound.ogg', 'Cherry MX Brown - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -559,9 +556,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-brown-pbt">Cherry MX Brown - PBT Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-brown-pbt">Cherry MX Brown - PBT Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Mellow tactile response with enhanced low-frequency pitch from PBT keycaps.</p>
               </div>
 
@@ -581,7 +578,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-brown-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-brown-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -599,7 +596,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Cherry MX Red - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Cherry MX Red - ABS Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -609,7 +606,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Cherry MX Red - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Cherry MX Red - ABS Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -622,9 +619,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/cherrymx-red-abs">Cherry MX Red - ABS Keycaps</a>
+                  <a href="/keyclack/sound-packs/cherrymx-red-abs">Cherry MX Red - ABS Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Lightweight linear action preferred by fast typists and competitive gamers.</p>
               </div>
 
@@ -644,7 +641,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-cherrymx-red-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-cherrymx-red-abs" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -662,7 +659,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/eg-crystal-purple/purple.jpg" alt="EG Crystal Purple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/eg-crystal-purple/purple.jpg" alt="EG Crystal Purple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -672,7 +669,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/eg-crystal-purple/purple.ogg', 'EG Crystal Purple')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/eg-crystal-purple/purple.ogg', 'EG Crystal Purple')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -685,9 +682,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/eg-crystal-purple">EG Crystal Purple</a>
+                  <a href="/keyclack/sound-packs/eg-crystal-purple">EG Crystal Purple</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Sharp tactile feedback with crystalline clack acoustics.</p>
               </div>
 
@@ -707,7 +704,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-eg-crystal-purple" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-eg-crystal-purple" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -725,7 +722,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Topre Purple Hybrid - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Topre Purple Hybrid - PBT Keycaps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -735,7 +732,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Topre Purple Hybrid - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Topre Purple Hybrid - PBT Keycaps')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -748,9 +745,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/topre-purple-hybrid-pbt">Topre Purple Hybrid - PBT Keycaps</a>
+                  <a href="/keyclack/sound-packs/topre-purple-hybrid-pbt">Topre Purple Hybrid - PBT Keycaps</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Legendary Topre dome “thock” with muted upstroke silence rings and premium PBT feel.</p>
               </div>
 
@@ -770,7 +767,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/keyboard-topre-purple-hybrid-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/keyboard-topre-purple-hybrid-pbt" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -788,7 +785,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/screens/ss1.png" alt="Ping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/screens/ss1.png" alt="Ping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -798,7 +795,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/mouse/ping/ping.mp3', 'Ping')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/mouse/ping/ping.mp3', 'Ping')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -811,9 +808,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/mouse-ping">Ping</a>
+                  <a href="/keyclack/sound-packs/mouse-ping">Ping</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Crisp, high-definition optical mouse microswitch acoustic feedback.</p>
               </div>
 
@@ -833,7 +830,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mouse-ping" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mouse-ping" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -851,7 +848,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/screens/ss2.png" alt="Wooden Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/screens/ss2.png" alt="Wooden Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -861,7 +858,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/mouse/wooden/wooden.mp3', 'Wooden Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/mouse/wooden/wooden.mp3', 'Wooden Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -874,9 +871,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/mouse-wooden">Wooden Mouse</a>
+                  <a href="/keyclack/sound-packs/mouse-wooden">Wooden Mouse</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Warm, organic woodblock click tones for soothing mouse interaction.</p>
               </div>
 
@@ -896,7 +893,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mouse-wooden" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mouse-wooden" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -914,7 +911,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/screens/ss3.png" alt="Vibrate Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/screens/ss3.png" alt="Vibrate Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -924,7 +921,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/mouse/vibrate/vibrate.mp3', 'Vibrate Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/mouse/vibrate/vibrate.mp3', 'Vibrate Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -937,9 +934,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/mouse-vibrate">Vibrate Mouse</a>
+                  <a href="/keyclack/sound-packs/mouse-vibrate">Vibrate Mouse</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Low-frequency resonant tactile impulse simulation for clicks.</p>
               </div>
 
@@ -959,7 +956,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mouse-vibrate" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mouse-vibrate" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -977,7 +974,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/screens/ss1.png" alt="Chat Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/screens/ss1.png" alt="Chat Mouse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -987,7 +984,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/mouse/chat/chat.mp3', 'Chat Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/mouse/chat/chat.mp3', 'Chat Mouse')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1000,9 +997,9 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/mouse-chat">Chat Mouse</a>
+                  <a href="/keyclack/sound-packs/mouse-chat">Chat Mouse</a>
                 </h3>
-                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">Mechvibes</span></p>
+                <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">KeyClack</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Quiet bubble-like click simulation for stealthy late-night browsing.</p>
               </div>
 
@@ -1022,7 +1019,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mouse-chat" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mouse-chat" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1040,7 +1037,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="Creamy Thingy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="Creamy Thingy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1050,7 +1047,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/eg-oreo/oreo.ogg', 'Creamy Thingy')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/eg-oreo/oreo.ogg', 'Creamy Thingy')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1063,7 +1060,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/creamy-thingy">Creamy Thingy</a>
+                  <a href="/keyclack/sound-packs/creamy-thingy">Creamy Thingy</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">yozyrexx</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Deeply lubed, buttery smooth keyboard sound profile with ultra-marbly acoustics.</p>
@@ -1085,7 +1082,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-7b6a156a19a249d9b8002ab918649c2d" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-7b6a156a19a249d9b8002ab918649c2d" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1103,7 +1100,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Wooting 60HE v2 (L45 Switches)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Wooting 60HE v2 (L45 Switches)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1113,7 +1110,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Wooting 60HE v2 (L45 Switches)')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Wooting 60HE v2 (L45 Switches)')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1126,7 +1123,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/wooting-60he-v2">Wooting 60HE v2 (L45 Switches)</a>
+                  <a href="/keyclack/sound-packs/wooting-60he-v2">Wooting 60HE v2 (L45 Switches)</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">LekkerLab</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Accurate acoustic capture of the Wooting 60HE rapid trigger analog gaming keyboard.</p>
@@ -1148,7 +1145,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-wooting-60he-v2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-wooting-60he-v2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1166,7 +1163,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Gateron Ink Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="Gateron Ink Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1176,7 +1173,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Gateron Ink Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'Gateron Ink Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1189,7 +1186,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/gateron-ink-red">Gateron Ink Red</a>
+                  <a href="/keyclack/sound-packs/gateron-ink-red">Gateron Ink Red</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">SwitchesDaily</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Smoky transparent housing sound signature with signature deep clack upon bottom out.</p>
@@ -1211,7 +1208,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-gateron-ink-red" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-gateron-ink-red" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1229,7 +1226,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Akko TAC75 HE v2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/topre-purple-hybrid-pbt/topre.jpg" alt="Akko TAC75 HE v2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1239,7 +1236,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Akko TAC75 HE v2')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/topre-purple-hybrid-pbt/sound.ogg', 'Akko TAC75 HE v2')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1252,7 +1249,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/akko-tac75-he-2">Akko TAC75 HE v2</a>
+                  <a href="/keyclack/sound-packs/akko-tac75-he-2">Akko TAC75 HE v2</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">AkkoLover</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Gasket-mounted aluminum plate sound profile with foam dampening.</p>
@@ -1274,7 +1271,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-akko-tac75-he-2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-akko-tac75-he-2" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1292,7 +1289,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="ASMR Programming Soundpack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/eg-oreo/oreo.jpg" alt="ASMR Programming Soundpack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1302,7 +1299,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/eg-oreo/oreo.ogg', 'ASMR Programming Soundpack')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/eg-oreo/oreo.ogg', 'ASMR Programming Soundpack')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1315,7 +1312,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/asmr-programming-soundpack">ASMR Programming Soundpack</a>
+                  <a href="/keyclack/sound-packs/asmr-programming-soundpack">ASMR Programming Soundpack</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">CodeVibe</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Designed specifically for long coding sessions with non-fatiguing relaxing frequencies.</p>
@@ -1337,7 +1334,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-asmr-programming-soundpack" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-asmr-programming-soundpack" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1355,7 +1352,7 @@
             
             <!-- Card Image & Header -->
             <div class="relative h-44 bg-base-300 overflow-hidden">
-              <img src="/mechvibes/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="HyperX Alloy Origins Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <img src="/keyclack/soundpacks/keyboard/cherrymx-red-abs/red.jpg" alt="HyperX Alloy Origins Red" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
               <!-- Badges -->
@@ -1365,7 +1362,7 @@
               </div>
 
               <!-- Quick Play Preview Button Overlay -->
-              <button onclick="previewAudio('/mechvibes/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'HyperX Alloy Origins Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
+              <button onclick="previewAudio('/keyclack/soundpacks/keyboard/cherrymx-red-abs/sound.ogg', 'HyperX Alloy Origins Red')" class="btn btn-circle btn-primary btn-sm absolute bottom-3 right-3 shadow-lg hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
 
@@ -1378,7 +1375,7 @@
             <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-1.5">
                 <h3 class="font-bold text-base text-base-content hover:text-primary transition-colors">
-                  <a href="/mechvibes/sound-packs/hyperx-alloy-origins-red-switches">HyperX Alloy Origins Red</a>
+                  <a href="/keyclack/sound-packs/hyperx-alloy-origins-red-switches">HyperX Alloy Origins Red</a>
                 </h3>
                 <p class="text-xs text-base-content/60">by <span class="font-medium text-base-content/80">HyperXGamer</span></p>
                 <p class="text-xs text-base-content/70 line-clamp-2 mt-2 leading-relaxed">Aluminum chassis resonance combined with responsive linear key actuations.</p>
@@ -1400,7 +1397,7 @@
                 </div>
 
                 <div class="flex items-center gap-1.5">
-                  <a href="mechvibes://install/mv-hyperx-alloy-origins-red-switches" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in Mechvibes desktop app">
+                  <a href="mechvibes://install/mv-hyperx-alloy-origins-red-switches" class="btn btn-xs btn-primary rounded-lg gap-1" title="Install directly in KeyClack desktop app">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Install
                   </a>
@@ -1430,8 +1427,8 @@
 
   <script>
     function previewAudio(soundFile, title) {
-      window.mechvibes.setSoundpack(soundFile);
-      window.mechvibes.playKey();
+      window.keyclack.setSoundpack(soundFile);
+      window.keyclack.playKey();
 
       const toast = document.getElementById('previewToast');
       const titleEl = document.getElementById('previewTitle');
@@ -1450,55 +1447,55 @@
     <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
       <div class="col-span-2 space-y-4">
         <div class="flex items-center space-x-2.5">
-          <img src="/mechvibes/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
-          <span class="font-bold text-lg">Mechvibes</span>
+          <img src="/keyclack/logo.svg" alt="KeyClack" class="h-7 w-7"/>
+          <span class="font-bold text-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">KeyClack</span>
         </div>
         <p class="text-sm text-base-content/60 max-w-sm">
-          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+          High performance, ultra low-latency mechanical keyboard audio companion. Bringing authentic tactile auditory acoustics to every keystroke across Linux, Windows, and macOS.
         </p>
         <div class="flex gap-4 text-xs text-base-content/50 pt-2">
-          <span>Version 3.3.0</span>
+          <span>v3.3.0 Rebrand</span>
           <span>•</span>
           <span>MIT Licensed</span>
+          <span>•</span>
+          <span>100% Offline-First</span>
         </div>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/mechvibes/download" class="hover:text-primary transition-colors">Download</a></li>
-          <li><a href="/mechvibes/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
-          <li><a href="/mechvibes/themes" class="hover:text-primary transition-colors">Themes</a></li>
-          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+          <li><a href="/keyclack/download" class="hover:text-primary transition-colors">Download App</a></li>
+          <li><a href="/keyclack/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/keyclack/themes" class="hover:text-primary transition-colors">Themes Gallery</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/mechvibes/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
-          <li><a href="/mechvibes/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
-          <li><a href="/mechvibes/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
-          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+          <li><a href="/keyclack/guides" class="hover:text-primary transition-colors">User Guides</a></li>
+          <li><a href="/keyclack/blog" class="hover:text-primary transition-colors">Articles & Blog</a></li>
+          <li><a href="/keyclack/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
-          <li><a href="/mechvibes/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-          <li><a href="/mechvibes/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+          <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Source</a></li>
+          <li><a href="/keyclack/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/keyclack/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
         </ul>
       </div>
     </div>
 
     <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
-      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <p>© 2026 KeyClack. Crafted with open-source love for typists worldwide.</p>
       <div class="flex items-center gap-4">
-        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
-        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
-        <a href="/mechvibes/download" class="hover:text-base-content">Releases</a>
+        <a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-base-content">GitHub (aslamrosul/keyclack)</a>
+        <a href="/keyclack/download" class="hover:text-base-content">Releases</a>
       </div>
     </div>
   </footer>
@@ -1508,13 +1505,14 @@
     (function() {
       // Dynamic base URL for GitHub Pages
       const isGhPages = window.location.hostname.includes('github.io');
-      window.__MECHVIBES_BASE__ = isGhPages ? '/mechvibes' : '';
+      window.__KEYCLACK_BASE__ = isGhPages ? '/keyclack' : '';
+      window.__MECHVIBES_BASE__ = window.__KEYCLACK_BASE__; // Backward compatibility
 
       // Audio engine with Web Audio API
       let audioCtx = null;
       let soundEnabled = true;
       let activeBuffer = null;
-      let soundpackUrl = (window.__MECHVIBES_BASE__ || '') + '/mechvibes/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let soundpackUrl = (window.__KEYCLACK_BASE__ || '') + '/keyclack/soundpacks/keyboard/eg-oreo/oreo.ogg';
       let volumeLevel = 0.8;
 
       function initAudio() {
@@ -1529,8 +1527,8 @@
       }
 
       function loadSoundpack(url) {
-        if (window.__MECHVIBES_BASE__ && url.startsWith('/') && !url.startsWith(window.__MECHVIBES_BASE__)) {
-          url = window.__MECHVIBES_BASE__ + url;
+        if (window.__KEYCLACK_BASE__ && url.startsWith('/') && !url.startsWith(window.__KEYCLACK_BASE__)) {
+          url = window.__KEYCLACK_BASE__ + url;
         }
         soundpackUrl = url;
         fetch(url)
@@ -1538,9 +1536,9 @@
           .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
           .then(decoded => {
             activeBuffer = decoded;
-            console.log('[Mechvibes Web] Soundpack loaded:', url);
+            console.log('[KeyClack Web] Soundpack loaded:', url);
           })
-          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+          .catch(err => console.warn('[KeyClack Web] Audio load error:', err));
       }
 
       function playKeyClick(randomPitch = true) {
@@ -1574,7 +1572,7 @@
       }
 
       // Expose globally
-      window.mechvibes = {
+      window.keyclack = {
         playKey: playKeyClick,
         setSoundpack: (url) => {
           initAudio();
@@ -1588,18 +1586,18 @@
         },
         setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
       };
+      window.mechvibes = window.keyclack; // Alias
 
       // Toggle button event
       const toggleBtn = document.getElementById('webAudioToggle');
       if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
-          window.mechvibes.toggleSound();
+          window.keyclack.toggleSound();
         });
       }
 
       // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
       window.addEventListener('keydown', (e) => {
-        // Avoid double triggering if active target is not ignored
         if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
           playKeyClick();
         }
