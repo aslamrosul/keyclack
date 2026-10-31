@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Mechvibes No Sound? Here is How to Fix It - Mechvibes Blog</title>
+  <meta name="description" content="Make every keystroke unique with Mechvibes. Add any sound you want to your typing - mechanical keyboards, typewriters, custom effects."/>
+  <meta property="og:title" content="Mechvibes No Sound? Here is How to Fix It - Mechvibes Blog"/>
+  <meta property="og:description" content="Personalize your typing experience with custom sounds"/>
+  <meta property="og:image" content="/screens/ss1.png"/>
+  <link rel="icon" href="/mechvibes/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="stylesheet" href="/mechvibes/css/main.css"/>
+  <link rel="stylesheet" href="/mechvibes/css/theme.css"/>
+  <style>
+    /* Smooth interactive typography & ambient highlights */
+    body {
+      background-color: var(--color-base-100, #121316);
+      color: var(--color-base-content, #f4f4f5);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .keyboard-key {
+      transition: all 0.08s ease-in-out;
+      user-select: none;
+    }
+    .keyboard-key:active, .keyboard-key.active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(1.2);
+    }
+    /* Waveform canvas */
+    .waveform-bar {
+      transition: height 0.1s ease;
+    }
+  </style>
+  
+</head>
+<body class="MOT0tq_className antialiased min-h-screen flex flex-col bg-base-100 text-base-content selection:bg-primary/20">
+
+  <!-- Top Sticky Navigation Pill -->
+  <header class="sticky top-4 z-50 w-full px-4">
+    <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
+      <div class="flex shrink-0 items-center">
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
+          <img alt="Mechvibes Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:rotate-12 duration-300" src="/mechvibes/logo.svg"/>
+          <span class="font-bold text-lg tracking-tight">Mechvibes</span>
+        </a>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-1">
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/sound-packs">Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-base-content/80 hover:text-base-content" href="/mechvibes/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 text-primary font-semibold" href="/mechvibes/blog">Blog</a>
+        <span class="tooltip tooltip-bottom" data-tip="Coming soon">
+          <span class="px-3 py-1.5 text-xs font-medium rounded-lg text-base-content/40 cursor-not-allowed select-none">Merch</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Interactive Web Sound Trigger Pill -->
+        <button id="webAudioToggle" class="btn btn-xs btn-outline btn-primary rounded-full gap-1.5 px-3">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span id="audioToggleLabel">Sound: ON</span>
+        </button>
+
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/mechvibes/login">Sign In</a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/mechvibes/blog">Blog</a>
+      <div class="divider my-1"></div>
+      <a class="btn btn-sm btn-neutral w-full" href="/mechvibes/login">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="flex-grow">
+    
+  <section class="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <div class="text-xs breadcrumbs text-base-content/60">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/mechvibes/blog">Blog</a></li>
+          <li class="text-base-content font-medium">Mechvibes No Sound? Here is How to Fix It</li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <div class="badge badge-primary badge-outline text-xs">Troubleshooting</div>
+        <h1 class="text-3xl sm:text-5xl font-black text-base-content leading-tight tracking-tight">Mechvibes No Sound? Here is How to Fix It</h1>
+        <div class="flex items-center gap-3 text-xs text-base-content/50">
+          <span>By Audio Support</span>
+          <span>•</span>
+          <span>Oct 24, 2026</span>
+          <span>•</span>
+          <span>4 min read</span>
+        </div>
+      </div>
+
+      <div class="rounded-3xl overflow-hidden border border-base-300 shadow-xl max-h-96">
+        <img src="/mechvibes/screens/ss2.png" alt="Mechvibes No Sound? Here is How to Fix It" class="w-full h-full object-cover"/>
+      </div>
+
+      <div class="prose prose-invert max-w-none text-base-content/80 leading-relaxed space-y-6 pt-4 border-t border-base-300 text-sm sm:text-base">
+        
+      <h2>1. Check Volume Sliders</h2>
+      <p>Ensure that both the in-app volume slider (located in the bottom dock) and your system master volume are turned up.</p>
+      <h2>2. Audio Output Device Selection</h2>
+      <p>Open Settings in Mechvibes and verify the selected Audio Output Device. If set to an inactive Bluetooth headphone or unplugged monitor, switch to Default or your active speakers.</p>
+    
+      </div>
+
+      <div class="pt-8 border-t border-base-300 flex justify-between items-center">
+        <a href="/mechvibes/blog" class="btn btn-sm btn-ghost gap-2">← Back to Blog</a>
+        <a href="/mechvibes/download" class="btn btn-sm btn-primary rounded-xl">Try Mechvibes</a>
+      </div>
+    </div>
+  </section>
+  
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="bg-base-200/60 border-t border-base-300/80 py-16 px-6 lg:px-8 mt-20">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <img src="/mechvibes/logo.svg" alt="Mechvibes" class="h-7 w-7"/>
+          <span class="font-bold text-lg">Mechvibes</span>
+        </div>
+        <p class="text-sm text-base-content/60 max-w-sm">
+          High performance, low-latency mechanical keyboard and mouse sound simulation. Bringing tactile auditory joy to every keystroke across Windows, macOS, and Linux.
+        </p>
+        <div class="flex gap-4 text-xs text-base-content/50 pt-2">
+          <span>Version 3.3.0</span>
+          <span>•</span>
+          <span>MIT Licensed</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/mechvibes/download" class="hover:text-primary transition-colors">Download</a></li>
+          <li><a href="/mechvibes/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="/mechvibes/themes" class="hover:text-primary transition-colors">Themes</a></li>
+          <li><a href="https://editor.mechvibes.com" target="_blank" class="hover:text-primary transition-colors">Pack Editor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="/mechvibes/guides" class="hover:text-primary transition-colors">Guides & Tutorials</a></li>
+          <li><a href="/mechvibes/blog" class="hover:text-primary transition-colors">Official Blog</a></li>
+          <li><a href="/mechvibes/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
+        <ul class="space-y-2 text-sm text-base-content/70">
+          <li><a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></li>
+          <li><a href="/mechvibes/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/mechvibes/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto pt-10 mt-10 border-t border-base-300/40 flex flex-col sm:flex-row justify-between items-center text-xs text-base-content/50 gap-4">
+      <p>© 2026 Mechvibes. Crafted with open-source love for typists worldwide.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hainguyents13/mechvibes" target="_blank" class="hover:text-base-content">GitHub</a>
+        <a href="https://discord.gg/ydZqwvrvYS" target="_blank" class="hover:text-base-content">Discord</a>
+        <a href="/mechvibes/download" class="hover:text-base-content">Releases</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Universal In-Browser Web Audio Synthesizer Engine -->
+  <script>
+    (function() {
+      // Dynamic base URL for GitHub Pages
+      const isGhPages = window.location.hostname.includes('github.io');
+      window.__MECHVIBES_BASE__ = isGhPages ? '/mechvibes' : '';
+
+      // Audio engine with Web Audio API
+      let audioCtx = null;
+      let soundEnabled = true;
+      let activeBuffer = null;
+      let soundpackUrl = (window.__MECHVIBES_BASE__ || '') + '/mechvibes/soundpacks/keyboard/eg-oreo/oreo.ogg';
+      let volumeLevel = 0.8;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+          loadSoundpack(soundpackUrl);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function loadSoundpack(url) {
+        if (window.__MECHVIBES_BASE__ && url.startsWith('/') && !url.startsWith(window.__MECHVIBES_BASE__)) {
+          url = window.__MECHVIBES_BASE__ + url;
+        }
+        soundpackUrl = url;
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(arrayBuf => audioCtx.decodeAudioData(arrayBuf))
+          .then(decoded => {
+            activeBuffer = decoded;
+            console.log('[Mechvibes Web] Soundpack loaded:', url);
+          })
+          .catch(err => console.warn('[Mechvibes Web] Audio load error:', err));
+      }
+
+      function playKeyClick(randomPitch = true) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!activeBuffer || !audioCtx) return;
+
+        try {
+          const source = audioCtx.createBufferSource();
+          source.buffer = activeBuffer;
+
+          // Randomize slice to give realistic natural typing variation
+          const duration = 0.12; // 120ms click
+          const maxStart = Math.max(0, activeBuffer.duration - duration);
+          const start = Math.random() * maxStart;
+
+          if (randomPitch) {
+            source.playbackRate.value = 0.96 + Math.random() * 0.08;
+          }
+
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.value = volumeLevel;
+
+          source.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          source.start(0, start, duration);
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      // Expose globally
+      window.mechvibes = {
+        playKey: playKeyClick,
+        setSoundpack: (url) => {
+          initAudio();
+          loadSoundpack(url);
+        },
+        toggleSound: () => {
+          soundEnabled = !soundEnabled;
+          const label = document.getElementById('audioToggleLabel');
+          if (label) label.textContent = 'Sound: ' + (soundEnabled ? 'ON' : 'OFF');
+          return soundEnabled;
+        },
+        setVolume: (v) => { volumeLevel = Math.max(0, Math.min(1, v)); }
+      };
+
+      // Toggle button event
+      const toggleBtn = document.getElementById('webAudioToggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          window.mechvibes.toggleSound();
+        });
+      }
+
+      // Listen to typing anywhere on page if interactive mode is triggered or on typing inputs
+      window.addEventListener('keydown', (e) => {
+        // Avoid double triggering if active target is not ignored
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          playKeyClick();
+        }
+      });
+    })();
+  </script>
+  
+</body>
+</html>
