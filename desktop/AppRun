@@ -11,29 +11,9 @@ rm -f "${HOME}/.local/share/mechvibes/data/soundpack_cache.json" 2>/dev/null || 
 # Start auto-volume calibrator daemon (locks keyboard acoustic loudness)
 /home/aslam/.local/bin/keyclack-autovol start 2>/dev/null || true
 
-# Rename window in background once spawned to ensure 100% KeyClack rebrand
-(
-  for i in {1..20}; do
-    WID=$(wmctrl -l 2>/dev/null | grep -i "Mechvibes" | awk '{print $1}' || true)
-    if [ -n "$WID" ]; then
-      python3 -c "
-import ctypes
-X11 = ctypes.cdll.LoadLibrary('libX11.so.6')
-X11.XOpenDisplay.restype = ctypes.c_void_p
-d = X11.XOpenDisplay(b':0')
-if d:
-  wid = int('$WID', 16)
-  name = b'KeyClack'
-  X11.XStoreName(d, ctypes.c_ulong(wid), name)
-  net_name = X11.XInternAtom(d, b'_NET_WM_NAME', False)
-  utf8_str = X11.XInternAtom(d, b'UTF8_STRING', False)
-  X11.XChangeProperty(d, ctypes.c_ulong(wid), net_name, utf8_str, 8, 0, name, len(name))
-  X11.XFlush(d)
-  X11.XCloseDisplay(d)
-" 2>/dev/null && break
-    fi
-    sleep 0.5
-  done
-) &
+# Start background companion helper (renamer + hotkey Ctrl+Alt+S)
+/home/aslam/.local/bin/keyclack-helper &
+HELPER_PID=$!
+trap "kill $HELPER_PID 2>/dev/null || true" EXIT
 
 exec "${HERE}/usr/bin/mechvibes" "$@"

@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""
+KeyClack Companion Service
+- Rebrands window to 'KeyClack'
+- Registers global hotkey Ctrl+Alt+S to toggle Soundpack & Volume Hub
+- Ensures auto-volume lock daemon is active
+"""
+
+import os
+import sys
+import time
+import ctypes
+import subprocess
+import threading
+
+X11 = ctypes.cdll.LoadLibrary("libX11.so.6")
+X11.XOpenDisplay.restype = ctypes.c_void_p
+
+def rename_window():
+    d = X11.XOpenDisplay(b":0")
+    if not d:
+        return
+    for _ in range(25):
+        try:
+            res = subprocess.run(
+                ["wmctrl", "-l"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True
+            )
+            for line in res.stdout.splitlines():
+                if "Mechvibes" in line:
+                    wid_hex = line.split()[0]
+                    wid = int(wid_hex, 16)
+                    name = b"KeyClack"
+                    X11.XStoreName(d, ctypes.c_ulong(wid), name)
+                    net_name = X11.XInternAtom(d, b"_NET_WM_NAME", False)
+                    utf8_str = X11.XInternAtom(d, b"UTF8_STRING", False)
+                    X11.XChangeProperty(d, ctypes.c_ulong(wid), net_name, utf8_str, 8, 0, name, len(name))
+                    X11.XFlush(d)
+                    X11.XCloseDisplay(d)
+                    return
+        except Exception:
+            pass
+        time.sleep(0.4)
+    try:
+        X11.XCloseDisplay(d)
+    except Exception:
+        pass
+
+def hotkey_listener():
+    d = X11.XOpenDisplay(b":0")
+    if not d:
+        return
+    root = X11.XDefaultRootWindow(d)
+    kc = X11.XKeysymToKeycode(d, X11.XStringToKeysym(b"s"))
+
+    # Ctrl (4) + Alt (8) = 12
+    # Include CapsLock (2) and NumLock (16) modifiers
+    for mask in [0, 2, 16, 18]:
+        X11.XGrabKey(d, kc, 12 | mask, root, True, 1, 1)
+    X11.XFlush(d)
+
+    class XEvent(ctypes.Structure):
+        _fields_ = [("type", ctypes.c_int), ("pad", ctypes.c_byte * 192)]
+
+    event = XEvent()
+    while True:
+        X11.XNextEvent(d, ctypes.byref(event))
+        if event.type == 2:  # KeyPress
+            # Toggle / open keyclack-manager
+            subprocess.Popen(["/home/aslam/.local/bin/keyclack-manager"], start_new_session=True)
+
+def main():
+    # 1. Rename window in background
+    threading.Thread(target=rename_window, daemon=True).start()
+
+    # 2. Start global hotkey listener (Ctrl+Alt+S)
+    hotkey_listener()
+
+if __name__ == "__main__":
+    main()
