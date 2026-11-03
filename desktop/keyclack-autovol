@@ -40,23 +40,25 @@ def save_config(cfg):
         json.dump(cfg, f, indent=2)
 
 def get_master_sink_info():
-    """Returns (volume_percent_int, is_muted)"""
+    """Returns (volume_percent_int, is_muted) for active @DEFAULT_SINK@"""
     try:
-        res = subprocess.run(
-            ["pactl", "-f", "json", "list", "sinks"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+        vol_res = subprocess.run(
+            ["pactl", "get-sink-volume", "@DEFAULT_SINK@"],
+            capture_output=True,
             text=True,
-            timeout=2
+            timeout=1
         )
-        data = json.loads(res.stdout)
-        # Find default or running sink
-        for sink in data:
-            vol_str = sink.get("volume", {}).get("front-left", {}).get("value_percent", "50%")
-            m = re.search(r"(\d+)%", vol_str)
-            vol = int(m.group(1)) if m else 50
-            mute = sink.get("mute", False)
-            return vol, mute
+        m = re.search(r"/ +(\d+)% +/", vol_res.stdout)
+        vol = int(m.group(1)) if m else 50
+
+        mute_res = subprocess.run(
+            ["pactl", "get-sink-mute", "@DEFAULT_SINK@"],
+            capture_output=True,
+            text=True,
+            timeout=1
+        )
+        is_muted = "yes" in mute_res.stdout.lower()
+        return vol, is_muted
     except Exception:
         pass
     return 50, False
