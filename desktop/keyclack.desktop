@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=KeyClack
+Comment=Authentic mechanical keyboard acoustics as you type
+Exec=/home/aslam/.local/bin/keyclack %U
+Icon=keyclack
+Terminal=false
+Type=Application
+Categories=Utility;AudioVideo;Audio;
+StartupWMClass=mechvibes
+Keywords=keyboard;sound;audio;mechanical;typing;cherrymx;thock;
+Actions=LockVolume;DownloadPacks;CreateSound;OpenFolder;
+
+[Desktop Action LockVolume]
+Name=Kunci Volume Suara Keyboard (Auto-Calibrate)
+Exec=/home/aslam/.local/bin/keyclack-manager --tab=volume
+
+[Desktop Action DownloadPacks]
+Name=Download Soundpack Komunitas (Online)
+Exec=/home/aslam/.local/bin/keyclack-manager
+
+[Desktop Action CreateSound]
+Name=Buat Suara Switch Sendiri
+Exec=/home/aslam/.local/bin/keyclack-manager --tab=create
+
+[Desktop Action OpenFolder]
+Name=Buka Folder Koleksi Suara
+Exec=/home/aslam/.local/bin/keyclack-manager open-folder

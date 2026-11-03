@@ -62,12 +62,26 @@ npm run build:gh-pages
 
 ## 💻 Running Desktop App on Linux
 
-If running from the extracted standalone binary:
+The desktop application includes real-time global keyboard input listening, acoustic inverse volume locking, and automatic community soundpack management:
 
 ```bash
-# Launch KeyClack in the background
+# Launch unified KeyClack desktop app
 keyclack
+
+# Open Soundpack Hub & Volume Lock settings directly
+keyclack-manager
+
+# Manage real-time auto-volume lock daemon
+keyclack-autovol status
+keyclack-autovol set 50
 ```
+
+### 🔊 Inverse Auto-Volume Calibration
+Locks the keyboard click sound level constant regardless of laptop master volume adjustments. When you turn master volume up (e.g. for a quiet video), KeyClack instantly scales down its playback volume so typing acoustics never burst your eardrums.
+
+### 🌐 Integrated Soundpack Downloader & Creator
+- **Download**: 1-click installation of community packs (Keychron Q3, Apex Pro, ASMR Programming, Holy Panda, etc.).
+- **Create**: Turn any audio file (`.wav`, `.mp3`, `.ogg`, `.flac`) into a full 75-key switch soundpack with natural random pitch variation.
 
 ---
 

@@ -1,0 +1,908 @@
+#!/usr/bin/env python3
+"""
+KeyClack Soundpack Hub
+Download community soundpacks, create custom keyboard switch packs from any audio file,
+and lock keyboard acoustic loudness with inverse auto-calibration.
+"""
+
+import os
+import sys
+import json
+import urllib.request
+import zipfile
+import io
+import shutil
+import subprocess
+import threading
+import re
+
+sys.path.insert(0, "/home/aslam/.local/bin")
+import keyclack_autovol
+
+KEYCLACK_DIR = os.path.expanduser("~/.local/share/mechvibes")
+SOUNDPACKS_DIR = os.path.join(KEYCLACK_DIR, "soundpacks", "keyboard")
+CACHE_FILE = os.path.join(KEYCLACK_DIR, "data", "soundpack_cache.json")
+ICON_FILE = "/home/aslam/.gemini/antigravity/scratch/mechvibes-clone/squashfs-root/keyclack.png"
+APP_EXEC = "/home/aslam/.local/bin/keyclack"
+
+# Ensure directories exist
+os.makedirs(SOUNDPACKS_DIR, exist_ok=True)
+os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+
+# Full standard keyboard key list for Mechvibes V2
+ALL_KEYS = [
+    # Letters
+    "KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ",
+    "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT",
+    "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ",
+    # Digits
+    "Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9",
+    # Controls & Navigation
+    "Space", "Enter", "Backspace", "Tab", "ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight",
+    "AltLeft", "AltRight", "Escape", "CapsLock", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+    "Backquote", "Minus", "Equal", "BracketLeft", "BracketRight", "Backslash", "Semicolon", "Quote",
+    "Comma", "Period", "Slash",
+    # Function keys
+    "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"
+]
+
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9]+', '-', text)
+    return text.strip('-') or 'custom-switch'
+
+def clear_soundpack_cache():
+    try:
+        if os.path.exists(CACHE_FILE):
+            os.remove(CACHE_FILE)
+            print("Soundpack cache cleared.")
+    except Exception as e:
+        print(f"Error clearing cache: {e}")
+
+def restart_keyclack():
+    subprocess.run(["pkill", "-f", "mechvibes"], check=False)
+    clear_soundpack_cache()
+    keyclack_autovol.start_daemon()
+    env = os.environ.copy()
+    env["DISPLAY"] = env.get("DISPLAY", ":0")
+    subprocess.Popen([APP_EXEC], env=env, start_new_session=True)
+
+def get_installed_packs():
+    installed = {}
+    if not os.path.exists(SOUNDPACKS_DIR):
+        return installed
+    for item in sorted(os.listdir(SOUNDPACKS_DIR)):
+        item_path = os.path.join(SOUNDPACKS_DIR, item)
+        if os.path.isdir(item_path):
+            cfg_path = os.path.join(item_path, "config.json")
+            if os.path.exists(cfg_path):
+                try:
+                    with open(cfg_path, "r", encoding="utf-8") as f:
+                        cfg = json.load(f)
+                    installed[item] = {
+                        "name": cfg.get("name", item),
+                        "author": cfg.get("author", "Unknown"),
+                        "description": cfg.get("description", ""),
+                        "folder": item,
+                        "path": item_path
+                    }
+                except Exception:
+                    installed[item] = {"name": item, "author": "Unknown", "folder": item, "path": item_path}
+    return installed
+
+def download_and_extract_pack(pack_id, pack_name, callback=None):
+    slug = slugify(pack_name)
+    target_dir = os.path.join(SOUNDPACKS_DIR, slug)
+    url = f"https://mechvibes.com/api/sound-packs/{pack_id}/download"
+
+    if callback:
+        callback(f"Mengunduh {pack_name}...", 0.2)
+
+    req = urllib.request.Request(url, headers={"User-Agent": "KeyClack/1.0"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = resp.read()
+
+    if callback:
+        callback("Mengekstrak file...", 0.6)
+
+    z = zipfile.ZipFile(io.BytesIO(data))
+    names = z.namelist()
+    config_entry = next((n for n in names if os.path.basename(n) == "config.json"), None)
+    prefix = ""
+    if config_entry and "/" in config_entry:
+        prefix = config_entry.rsplit("/", 1)[0] + "/"
+
+    os.makedirs(target_dir, exist_ok=True)
+    for member in z.infolist():
+        if member.is_dir():
+            continue
+        rel_name = member.filename[len(prefix):] if (prefix and member.filename.startswith(prefix)) else os.path.basename(member.filename)
+        if not rel_name:
+            continue
+        out_path = os.path.join(target_dir, rel_name)
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with z.open(member) as src, open(out_path, "wb") as dst:
+            dst.write(src.read())
+
+    clear_soundpack_cache()
+    if callback:
+        callback("Selesai dipasang!", 1.0)
+    return target_dir
+
+def create_soundpack_from_audio(audio_path, pack_name, random_pitch=True, space_thock=True, callback=None):
+    if not os.path.exists(audio_path):
+        raise FileNotFoundError(f"File audio tidak ditemukan: {audio_path}")
+
+    slug = slugify(pack_name)
+    target_dir = os.path.join(SOUNDPACKS_DIR, slug)
+    os.makedirs(target_dir, exist_ok=True)
+
+    target_audio = os.path.join(target_dir, "sound.wav")
+
+    if callback:
+        callback("Mengonversi audio ke format WAV kualitas tinggi...", 0.3)
+
+    # Convert audio with ffmpeg to 44.1kHz stereo WAV
+    cmd = [
+        "ffmpeg", "-y", "-i", audio_path,
+        "-vn", "-ar", "44100", "-ac", "2",
+        "-c:a", "pcm_s16le", target_audio
+    ]
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if res.returncode != 0:
+        raise RuntimeError(f"Gagal mengonversi file audio: {res.stderr.decode()}")
+
+    if callback:
+        callback("Menganalisis durasi suara...", 0.6)
+
+    # Get duration with ffprobe
+    probe_cmd = [
+        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1", target_audio
+    ]
+    p_res = subprocess.run(probe_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    duration_sec = float(p_res.stdout.decode().strip() or "0.35")
+    duration_ms = min(duration_sec * 1000.0, 800.0) # Cap at 800ms for crisp keystroke response
+
+    if callback:
+        callback("Membuat konfigurasi tombol keyboard...", 0.8)
+
+    definitions = {}
+    for key in ALL_KEYS:
+        definitions[key] = {
+            "timing": [[0.0, round(duration_ms, 2)]]
+        }
+
+    config = {
+        "name": pack_name,
+        "author": "Custom",
+        "description": f"Custom switch dibuat dari {os.path.basename(audio_path)}",
+        "version": "1.0",
+        "config_version": 2,
+        "audio_file": "sound.wav",
+        "definition_method": "single",
+        "options": {
+            "random_pitch": bool(random_pitch),
+            "recommended_volume": 1.0
+        },
+        "definitions": definitions
+    }
+
+    config_path = os.path.join(target_dir, "config.json")
+    with open(config_path, "w", encoding="utf-8") as f:
+        json.dump(config, f, indent=2)
+
+    clear_soundpack_cache()
+    if callback:
+        callback("Soundpack berhasil dibuat dan dipasang!", 1.0)
+    return target_dir
+
+
+# GUI Implementation with PyGObject GTK 3
+def run_gui(start_tab=0):
+    import gi
+    gi.require_version("Gtk", "3.0")
+    from gi.repository import Gtk, Gdk, GLib, Pango
+
+    class KeyClackManagerWindow(Gtk.Window):
+        def __init__(self, start_tab=0):
+            super().__init__(title="KeyClack - Soundpack Hub")
+            self.set_default_size(800, 580)
+            self.set_position(Gtk.WindowPosition.CENTER)
+
+            if os.path.exists(ICON_FILE):
+                try:
+                    self.set_icon_from_file(ICON_FILE)
+                except Exception:
+                    pass
+
+            self.online_packs = []
+            self.filtered_online_packs = []
+            self.selected_audio_file = None
+
+            # Main layout
+            vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+            self.add(vbox)
+
+            # Header Banner
+            header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+            header_box.set_margin_top(14)
+            header_box.set_margin_bottom(14)
+            header_box.set_margin_start(18)
+            header_box.set_margin_end(18)
+
+            title_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+            lbl_title = Gtk.Label()
+            lbl_title.set_markup("<span font='16' weight='bold' color='#4338ca'>KeyClack Soundpack Hub</span>")
+            lbl_title.set_halign(Gtk.Align.START)
+            lbl_sub = Gtk.Label(label="Unduh switch keyboard komunitas, buat suara sendiri, dan kunci volume suara keyboard.")
+            lbl_sub.set_halign(Gtk.Align.START)
+            title_box.pack_start(lbl_title, False, False, 0)
+            title_box.pack_start(lbl_sub, False, False, 0)
+            header_box.pack_start(title_box, True, True, 0)
+
+            btn_open_folder = Gtk.Button(label="📁 Folder Suara")
+            btn_open_folder.connect("clicked", lambda _: subprocess.Popen(["xdg-open", SOUNDPACKS_DIR]))
+            header_box.pack_end(btn_open_folder, False, False, 0)
+
+            btn_restart_app = Gtk.Button(label="🔄 Refresh KeyClack")
+            btn_restart_app.connect("clicked", self.on_restart_clicked)
+            header_box.pack_end(btn_restart_app, False, False, 4)
+
+            vbox.pack_start(header_box, False, False, 0)
+
+            # Separator
+            sep = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
+            vbox.pack_start(sep, False, False, 0)
+
+            # Notebook Tabs
+            self.notebook = Gtk.Notebook()
+            self.notebook.set_margin_start(12)
+            self.notebook.set_margin_end(12)
+            self.notebook.set_margin_top(10)
+            self.notebook.set_margin_bottom(12)
+            vbox.pack_start(self.notebook, True, True, 0)
+
+            # Tab 1: Download Online
+            self.create_online_tab()
+
+            # Tab 2: Create Custom
+            self.create_custom_tab()
+
+            # Tab 3: Installed Packs
+            self.create_installed_tab()
+
+            # Tab 4: Volume Lock
+            self.create_volume_lock_tab()
+
+            self.notebook.set_current_page(start_tab)
+
+            # Status Bar
+            self.status_bar = Gtk.Statusbar()
+            self.status_context = self.status_bar.get_context_id("status")
+            vbox.pack_end(self.status_bar, False, False, 0)
+            self.set_status("Siap. Pilih soundpack untuk diunduh, buat suara baru, atau atur kunci volume.")
+
+            # Apply custom CSS
+            css = b"""
+            window { background-color: #f8fafc; }
+            button { border-radius: 6px; padding: 6px 12px; font-weight: 500; }
+            button.suggested-action { background-color: #4f46e5; color: white; border: none; }
+            button.suggested-action:hover { background-color: #4338ca; }
+            entry { border-radius: 6px; padding: 6px 10px; }
+            treeview { border-radius: 6px; }
+            frame { border-radius: 8px; margin-bottom: 6px; }
+            """
+            provider = Gtk.CssProvider()
+            provider.load_from_data(css)
+            Gtk.StyleContext.add_provider_for_screen(
+                Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
+
+            # Load online packs in background
+            threading.Thread(target=self.load_online_packs, daemon=True).start()
+
+        def set_status(self, text):
+            self.status_bar.pop(self.status_context)
+            self.status_bar.push(self.status_context, text)
+
+        # Tab 1: Online Downloads
+        def create_online_tab(self):
+            tab_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            tab_box.set_border_width(12)
+
+            search_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            lbl = Gtk.Label(label="Cari Suara:")
+            self.search_entry = Gtk.SearchEntry()
+            self.search_entry.set_placeholder_text("Ketik nama switch (misal: Keychron, Apex Pro, Blue, ASMR, Thock)...")
+            self.search_entry.connect("search-changed", self.on_search_changed)
+            search_bar.pack_start(lbl, False, False, 0)
+            search_bar.pack_start(self.search_entry, True, True, 0)
+
+            btn_refresh = Gtk.Button(label="🔄 Muat Ulang Katalog")
+            btn_refresh.connect("clicked", lambda _: threading.Thread(target=self.load_online_packs, daemon=True).start())
+            search_bar.pack_end(btn_refresh, False, False, 0)
+
+            tab_box.pack_start(search_bar, False, False, 0)
+
+            # List Store: [ID, Name, Author, Downloads, Description, StatusText, CanInstall]
+            self.online_store = Gtk.ListStore(str, str, str, str, str, str, bool)
+            self.online_tree = Gtk.TreeView(model=self.online_store)
+
+            r_name = Gtk.CellRendererText()
+            r_name.set_property("weight", Pango.Weight.BOLD)
+            col_name = Gtk.TreeViewColumn("Nama Soundpack", r_name, text=1)
+            col_name.set_min_width(220)
+            self.online_tree.append_column(col_name)
+
+            r_author = Gtk.CellRendererText()
+            col_author = Gtk.TreeViewColumn("Pembuat", r_author, text=2)
+            col_author.set_min_width(100)
+            self.online_tree.append_column(col_author)
+
+            r_dl = Gtk.CellRendererText()
+            col_dl = Gtk.TreeViewColumn("Unduhan", r_dl, text=3)
+            col_dl.set_min_width(70)
+            self.online_tree.append_column(col_dl)
+
+            r_desc = Gtk.CellRendererText()
+            r_desc.set_property("ellipsize", Pango.EllipsizeMode.END)
+            col_desc = Gtk.TreeViewColumn("Deskripsi", r_desc, text=4)
+            col_desc.set_min_width(180)
+            self.online_tree.append_column(col_desc)
+
+            r_status = Gtk.CellRendererText()
+            col_status = Gtk.TreeViewColumn("Status", r_status, text=5)
+            self.online_tree.append_column(col_status)
+
+            scrolled = Gtk.ScrolledWindow()
+            scrolled.set_vexpand(True)
+            scrolled.add(self.online_tree)
+            tab_box.pack_start(scrolled, True, True, 0)
+
+            # Action bar
+            action_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            self.btn_download = Gtk.Button(label="⬇️ Download & Pasang ke KeyClack")
+            self.btn_download.get_style_context().add_class("suggested-action")
+            self.btn_download.connect("clicked", self.on_download_selected)
+            action_box.pack_end(self.btn_download, False, False, 0)
+
+            self.spinner = Gtk.Spinner()
+            action_box.pack_end(self.spinner, False, False, 8)
+
+            tab_box.pack_start(action_box, False, False, 0)
+
+            tab_label = Gtk.Label(label="🌐 Download Komunitas")
+            self.notebook.append_page(tab_box, tab_label)
+
+        def load_online_packs(self):
+            GLib.idle_add(self.spinner.start)
+            GLib.idle_add(self.set_status, "Menghubungi katalog Mechvibes...")
+            try:
+                url = "https://mechvibes.com/api/sound-packs?limit=60&sortBy=downloads&category=keyboard"
+                req = urllib.request.Request(url, headers={"User-Agent": "KeyClack/1.0"})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    data = json.loads(resp.read().decode())
+                self.online_packs = data.get("packs", [])
+                GLib.idle_add(self.update_online_list)
+                GLib.idle_add(self.set_status, f"Berhasil memuat {len(self.online_packs)} soundpack dari komunitas.")
+            except Exception as e:
+                GLib.idle_add(self.set_status, f"Gagal memuat katalog: {e}")
+            finally:
+                GLib.idle_add(self.spinner.stop)
+
+        def update_online_list(self):
+            self.online_store.clear()
+            installed = get_installed_packs()
+            query = self.search_entry.get_text().lower()
+
+            for pack in self.online_packs:
+                name = pack.get("name", "Unknown")
+                slug = slugify(name)
+                author = pack.get("author", "Unknown")
+                dl = f"{pack.get('downloads', 0):,} dl"
+                desc = (pack.get("description") or "").replace("\n", " ").strip()
+                pid = pack.get("id", "")
+
+                if query and (query not in name.lower() and query not in desc.lower() and query not in author.lower()):
+                    continue
+
+                is_installed = slug in installed
+                status_text = "✓ Terpasang" if is_installed else "Tersedia"
+                self.online_store.append([pid, name, author, dl, desc, status_text, not is_installed])
+
+        def on_search_changed(self, entry):
+            self.update_online_list()
+
+        def on_download_selected(self, btn):
+            selection = self.online_tree.get_selection()
+            model, treeiter = selection.get_selected()
+            if not treeiter:
+                self.show_dialog("Pemberitahuan", "Silakan pilih salah satu soundpack di tabel terlebih dahulu.")
+                return
+
+            pid = model[treeiter][0]
+            name = model[treeiter][1]
+
+            self.btn_download.set_sensitive(False)
+            self.spinner.start()
+            self.set_status(f"Mengunduh {name}...")
+
+            def worker():
+                try:
+                    download_and_extract_pack(pid, name)
+                    GLib.idle_add(self.on_download_complete, name, True, None)
+                except Exception as e:
+                    GLib.idle_add(self.on_download_complete, name, False, str(e))
+
+            threading.Thread(target=worker, daemon=True).start()
+
+        def on_download_complete(self, name, success, error_msg):
+            self.btn_download.set_sensitive(True)
+            self.spinner.stop()
+            if success:
+                self.set_status(f"'{name}' berhasil dipasang! Merestart KeyClack...")
+                self.update_online_list()
+                self.update_installed_list()
+                restart_keyclack()
+                self.show_dialog(
+                    "Berhasil Dipasang!",
+                    f"Soundpack '{name}' telah berhasil diunduh dan dipasang!\n\nKeyClack telah dimuat ulang secara otomatis. Buka pilihan suara di KeyClack dan pilih '{name}'."
+                )
+            else:
+                self.set_status(f"Gagal mengunduh {name}: {error_msg}")
+                self.show_dialog("Gagal Mengunduh", f"Terjadi kesalahan saat mengunduh:\n{error_msg}")
+
+        # Tab 2: Create Custom Pack
+        def create_custom_tab(self):
+            tab_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
+            tab_box.set_border_width(18)
+
+            lbl_intro = Gtk.Label()
+            lbl_intro.set_markup(
+                "<b>Buat Soundpack Keyboard Sendiri</b>\n"
+                "Punya file rekaman audio switch, mesin tik jadul, suara tombol lucu, atau efek suara lain?\n"
+                "Pilih file audionya dan KeyClack akan otomatis memetakan seluruh tombol keyboard ke suara tersebut!"
+            )
+            lbl_intro.set_halign(Gtk.Align.START)
+            tab_box.pack_start(lbl_intro, False, False, 0)
+
+            # Step 1: File Chooser
+            f_frame = Gtk.Frame(label=" 1. Pilih File Audio ")
+            f_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+            f_box.set_border_width(12)
+            f_frame.add(f_box)
+
+            self.lbl_selected_file = Gtk.Label(label="Belum ada file dipilih (.wav, .mp3, .ogg, .flac, .m4a)")
+            self.lbl_selected_file.set_halign(Gtk.Align.START)
+            self.lbl_selected_file.set_hexpand(True)
+            f_box.pack_start(self.lbl_selected_file, True, True, 0)
+
+            btn_browse = Gtk.Button(label="📂 Telusuri File...")
+            btn_browse.connect("clicked", self.on_browse_audio)
+            f_box.pack_end(btn_browse, False, False, 0)
+
+            self.btn_preview = Gtk.Button(label="▶️ Putar Suara")
+            self.btn_preview.set_sensitive(False)
+            self.btn_preview.connect("clicked", self.on_preview_audio)
+            f_box.pack_end(self.btn_preview, False, False, 0)
+
+            tab_box.pack_start(f_frame, False, False, 0)
+
+            # Step 2: Name
+            n_frame = Gtk.Frame(label=" 2. Nama Soundpack Switch ")
+            n_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            n_box.set_border_width(12)
+            n_frame.add(n_box)
+
+            self.entry_pack_name = Gtk.Entry()
+            self.entry_pack_name.set_placeholder_text("Contoh: Mesin Tik Jadul, Suara Spacebar Padat, Blue Switch Saya")
+            n_box.pack_start(self.entry_pack_name, False, False, 0)
+
+            tab_box.pack_start(n_frame, False, False, 0)
+
+            # Step 3: Options
+            o_frame = Gtk.Frame(label=" 3. Pengaturan Variasi Suara ")
+            o_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            o_box.set_border_width(12)
+            o_frame.add(o_box)
+
+            self.chk_pitch = Gtk.CheckButton(label="Variasi Nada Alami (Random Pitch) - setiap ketikan terasa organik dan tidak monoton")
+            self.chk_pitch.set_active(True)
+            o_box.pack_start(self.chk_pitch, False, False, 0)
+
+            tab_box.pack_start(o_frame, False, False, 0)
+
+            # Create Button
+            btn_create = Gtk.Button(label="🚀 Buat & Pasang ke KeyClack Sekarang")
+            btn_create.get_style_context().add_class("suggested-action")
+            btn_create.set_margin_top(10)
+            btn_create.connect("clicked", self.on_create_pack_clicked)
+            tab_box.pack_start(btn_create, False, False, 0)
+
+            tab_label = Gtk.Label(label="➕ Buat Suara Sendiri")
+            self.notebook.append_page(tab_box, tab_label)
+
+        def on_browse_audio(self, btn):
+            dialog = Gtk.FileChooserDialog(
+                title="Pilih File Suara Switch",
+                parent=self,
+                action=Gtk.FileChooserAction.OPEN
+            )
+            dialog.add_buttons(
+                Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                Gtk.STOCK_OPEN, Gtk.ResponseType.OK
+            )
+
+            filter_audio = Gtk.FileFilter()
+            filter_audio.set_name("File Audio (*.wav, *.mp3, *.ogg, *.flac, *.m4a)")
+            for ext in ["*.wav", "*.mp3", "*.ogg", "*.flac", "*.m4a", "*.aac"]:
+                filter_audio.add_pattern(ext)
+            dialog.add_filter(filter_audio)
+
+            if dialog.run() == Gtk.ResponseType.OK:
+                self.selected_audio_file = dialog.get_filename()
+                base = os.path.basename(self.selected_audio_file)
+                self.lbl_selected_file.set_text(f"File: {base} ({self.selected_audio_file})")
+                self.btn_preview.set_sensitive(True)
+                if not self.entry_pack_name.get_text():
+                    name_guess = os.path.splitext(base)[0].replace("_", " ").replace("-", " ").title()
+                    self.entry_pack_name.set_text(name_guess)
+            dialog.destroy()
+
+        def on_preview_audio(self, btn):
+            if self.selected_audio_file and os.path.exists(self.selected_audio_file):
+                subprocess.Popen(["pw-play", self.selected_audio_file])
+
+        def on_create_pack_clicked(self, btn):
+            if not self.selected_audio_file:
+                self.show_dialog("File Belum Dipilih", "Silakan klik 'Telusuri File...' dan pilih file audio terlebih dahulu.")
+                return
+
+            name = self.entry_pack_name.get_text().strip()
+            if not name:
+                self.show_dialog("Nama Kosong", "Silakan ketik nama soundpack switch Anda.")
+                return
+
+            random_pitch = self.chk_pitch.get_active()
+
+            try:
+                dest = create_soundpack_from_audio(self.selected_audio_file, name, random_pitch=random_pitch)
+                self.update_installed_list()
+                restart_keyclack()
+                self.show_dialog(
+                    "Soundpack Berhasil Dibuat!",
+                    f"Soundpack '{name}' telah sukses dibuat dan dipasang ke:\n{dest}\n\nKeyClack telah dimuat ulang. Anda bisa langsung memilih '{name}' di menu dropdown switch KeyClack!"
+                )
+            except Exception as e:
+                self.show_dialog("Gagal Membuat Soundpack", f"Terjadi kesalahan:\n{e}")
+
+        # Tab 3: Installed Packs
+        def create_installed_tab(self):
+            tab_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            tab_box.set_border_width(12)
+
+            top_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            lbl = Gtk.Label(label="Daftar Soundpack yang Terpasang di Komputer Anda:")
+            lbl.set_halign(Gtk.Align.START)
+            top_bar.pack_start(lbl, True, True, 0)
+
+            btn_refresh = Gtk.Button(label="🔄 Refresh Daftar")
+            btn_refresh.connect("clicked", lambda _: self.update_installed_list())
+            top_bar.pack_end(btn_refresh, False, False, 0)
+
+            tab_box.pack_start(top_bar, False, False, 0)
+
+            self.installed_store = Gtk.ListStore(str, str, str, str)
+            self.installed_tree = Gtk.TreeView(model=self.installed_store)
+
+            r_name = Gtk.CellRendererText()
+            r_name.set_property("weight", Pango.Weight.BOLD)
+            col_name = Gtk.TreeViewColumn("Nama Soundpack", r_name, text=0)
+            col_name.set_min_width(240)
+            self.installed_tree.append_column(col_name)
+
+            r_author = Gtk.CellRendererText()
+            col_author = Gtk.TreeViewColumn("Pembuat", r_author, text=1)
+            col_author.set_min_width(120)
+            self.installed_tree.append_column(col_author)
+
+            r_folder = Gtk.CellRendererText()
+            col_folder = Gtk.TreeViewColumn("Nama Folder", r_folder, text=2)
+            col_folder.set_min_width(200)
+            self.installed_tree.append_column(col_folder)
+
+            scrolled = Gtk.ScrolledWindow()
+            scrolled.set_vexpand(True)
+            scrolled.add(self.installed_tree)
+            tab_box.pack_start(scrolled, True, True, 0)
+
+            # Bottom actions
+            act_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+
+            btn_open_selected = Gtk.Button(label="📁 Buka Folder Switch Ini")
+            btn_open_selected.connect("clicked", self.on_open_selected_folder)
+            act_box.pack_start(btn_open_selected, False, False, 0)
+
+            btn_delete = Gtk.Button(label="🗑️ Hapus Switch Ini")
+            btn_delete.connect("clicked", self.on_delete_selected_pack)
+            act_box.pack_start(btn_delete, False, False, 0)
+
+            btn_web_editor = Gtk.Button(label="🌐 Buka Sound Pack Editor Web Resmi")
+            btn_web_editor.connect("clicked", lambda _: subprocess.Popen(["xdg-open", "https://editor.mechvibes.com/"]))
+            act_box.pack_end(btn_web_editor, False, False, 0)
+
+            tab_box.pack_start(act_box, False, False, 0)
+
+            tab_label = Gtk.Label(label="📦 Terpasang")
+            self.notebook.append_page(tab_box, tab_label)
+
+            self.update_installed_list()
+
+        def update_installed_list(self):
+            self.installed_store.clear()
+            installed = get_installed_packs()
+            for slug, item in installed.items():
+                self.installed_store.append([
+                    item.get("name", slug),
+                    item.get("author", "Unknown"),
+                    slug,
+                    item.get("path", "")
+                ])
+
+        def on_open_selected_folder(self, btn):
+            selection = self.installed_tree.get_selection()
+            model, treeiter = selection.get_selected()
+            if not treeiter:
+                self.show_dialog("Pemberitahuan", "Pilih soundpack yang ingin dibuka foldernya.")
+                return
+            path = model[treeiter][3]
+            subprocess.Popen(["xdg-open", path])
+
+        def on_delete_selected_pack(self, btn):
+            selection = self.installed_tree.get_selection()
+            model, treeiter = selection.get_selected()
+            if not treeiter:
+                self.show_dialog("Pemberitahuan", "Pilih soundpack yang ingin dihapus.")
+                return
+            name = model[treeiter][0]
+            path = model[treeiter][3]
+
+            dialog = Gtk.MessageDialog(
+                parent=self,
+                flags=Gtk.DialogFlags.MODAL,
+                type=Gtk.MessageType.WARNING,
+                buttons=Gtk.ButtonsType.YES_NO,
+                message_format=f"Apakah Anda yakin ingin menghapus soundpack '{name}'?"
+            )
+            resp = dialog.run()
+            dialog.destroy()
+            if resp == Gtk.ResponseType.YES:
+                try:
+                    shutil.rmtree(path)
+                    clear_soundpack_cache()
+                    self.update_installed_list()
+                    restart_keyclack()
+                    self.set_status(f"'{name}' telah dihapus.")
+                except Exception as e:
+                    self.show_dialog("Gagal Menghapus", f"Error: {e}")
+
+        # Tab 4: Volume Lock (Inverse Auto-Calibration)
+        def create_volume_lock_tab(self):
+            tab_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
+            tab_box.set_border_width(18)
+
+            lbl_intro = Gtk.Label()
+            lbl_intro.set_markup(
+                "<b>Kunci Kenyaringan Suara Keyboard (Auto-Calibrate)</b>\n"
+                "Fitur ini memisahkan volume suara keyboard dari volume laptop Anda secara pintar.\n"
+                "Ketika Anda menaikkan volume laptop (misal dari 30% ke 80% untuk mendengar video yang lirih),\n"
+                "KeyClack secara instan mengecilkan volume dirinya sendiri. Sebaliknya saat laptop dipelankan, KeyClack menaikkannya.\n"
+                "<b>Hasilnya:</b> Suara ketikan keyboard selalu di tingkat kenyaringan yang <b>SAMA PERSIS</b>."
+            )
+            lbl_intro.set_halign(Gtk.Align.START)
+            tab_box.pack_start(lbl_intro, False, False, 0)
+
+            # Frame 1: Saklar Kunci Volume
+            s_frame = Gtk.Frame(label=" 1. Status Fitur ")
+            s_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+            s_box.set_border_width(12)
+            s_frame.add(s_box)
+
+            lbl_sw = Gtk.Label(label="Kunci Volume Suara Keyboard (Auto-Calibrate):")
+            lbl_sw.set_halign(Gtk.Align.START)
+            lbl_sw.set_hexpand(True)
+            s_box.pack_start(lbl_sw, True, True, 0)
+
+            self.sw_autovol = Gtk.Switch()
+            cfg = keyclack_autovol.load_config()
+            self.sw_autovol.set_active(cfg.get("enabled", True))
+            self.sw_autovol.connect("notify::active", self.on_autovol_toggled)
+            s_box.pack_end(self.sw_autovol, False, False, 0)
+
+            tab_box.pack_start(s_frame, False, False, 0)
+
+            # Frame 2: Slider Kenyaringan
+            v_frame = Gtk.Frame(label=" 2. Atur Ukuran Suara Keyboard yang Terkunci ")
+            v_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+            v_box.set_border_width(12)
+            v_frame.add(v_box)
+
+            lbl_slider_desc = Gtk.Label(label="Pilih seberapa kencang suara keyboard yang Anda inginkan (Acoustic Output Target):")
+            lbl_slider_desc.set_halign(Gtk.Align.START)
+            v_box.pack_start(lbl_slider_desc, False, False, 0)
+
+            self.scale_loudness = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 15, 100, 5)
+            self.scale_loudness.set_value(cfg.get("target_loudness_pct", 60))
+            self.scale_loudness.set_digits(0)
+            self.scale_loudness.set_value_pos(Gtk.PositionType.RIGHT)
+            self.scale_loudness.add_mark(30, Gtk.PositionType.BOTTOM, "Lembut (30%)")
+            self.scale_loudness.add_mark(60, Gtk.PositionType.BOTTOM, "Standar (60%)")
+            self.scale_loudness.add_mark(85, Gtk.PositionType.BOTTOM, "Kencang (85%)")
+            self.scale_loudness.connect("value-changed", self.on_loudness_changed)
+            v_box.pack_start(self.scale_loudness, False, False, 0)
+
+            # Preset buttons
+            preset_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+            lbl_presets = Gtk.Label(label="Pilihan Cepat:")
+            preset_box.pack_start(lbl_presets, False, False, 0)
+
+            for name, val in [("Lembut (35%)", 35), ("Standar (60%)", 60), ("Kencang (85%)", 85)]:
+                btn_p = Gtk.Button(label=name)
+                btn_p.connect("clicked", lambda _, v=val: self.scale_loudness.set_value(v))
+                preset_box.pack_start(btn_p, False, False, 0)
+
+            v_box.pack_start(preset_box, False, False, 4)
+            tab_box.pack_start(v_frame, False, False, 0)
+
+            # Frame 3: Live Telemetry
+            m_frame = Gtk.Frame(label=" 3. Monitor Kalibrasi Real-Time ")
+            m_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+            m_box.set_border_width(12)
+            m_frame.add(m_box)
+
+            self.lbl_telemetry_master = Gtk.Label()
+            self.lbl_telemetry_master.set_halign(Gtk.Align.START)
+            m_box.pack_start(self.lbl_telemetry_master, False, False, 0)
+
+            self.lbl_telemetry_keyclack = Gtk.Label()
+            self.lbl_telemetry_keyclack.set_halign(Gtk.Align.START)
+            m_box.pack_start(self.lbl_telemetry_keyclack, False, False, 0)
+
+            self.lbl_telemetry_status = Gtk.Label()
+            self.lbl_telemetry_status.set_halign(Gtk.Align.START)
+            m_box.pack_start(self.lbl_telemetry_status, False, False, 0)
+
+            tab_box.pack_start(m_frame, False, False, 0)
+
+            tab_label = Gtk.Label(label="🔊 Kunci Volume")
+            self.notebook.append_page(tab_box, tab_label)
+
+            # Start background live monitor update timer
+            GLib.timeout_add(1000, self.update_volume_lock_telemetry)
+            self.update_volume_lock_telemetry()
+
+        def on_autovol_toggled(self, switch, gparam):
+            is_active = switch.get_active()
+            cfg = keyclack_autovol.load_config()
+            cfg["enabled"] = is_active
+            keyclack_autovol.save_config(cfg)
+            if is_active:
+                keyclack_autovol.start_daemon()
+                keyclack_autovol.apply_calibration(cfg)
+                self.set_status("Kunci Volume Keyboard AKTIF.")
+            else:
+                keyclack_autovol.stop_daemon()
+                self.set_status("Kunci Volume Keyboard DINONAKTIFKAN.")
+            self.update_volume_lock_telemetry()
+
+        def on_loudness_changed(self, scale):
+            val = int(scale.get_value())
+            cfg = keyclack_autovol.load_config()
+            cfg["target_loudness_pct"] = val
+            keyclack_autovol.save_config(cfg)
+            keyclack_autovol.apply_calibration(cfg)
+            self.update_volume_lock_telemetry()
+
+        def update_volume_lock_telemetry(self):
+            cfg = keyclack_autovol.load_config()
+            master_vol, is_muted = keyclack_autovol.get_master_sink_info()
+            pid = keyclack_autovol.is_running()
+            target = cfg.get("target_loudness_pct", 60)
+            enabled = cfg.get("enabled", True)
+
+            self.lbl_telemetry_master.set_markup(
+                f"• <b>Volume Laptop (Master):</b> {master_vol}% {'(MUTED)' if is_muted else ''}"
+            )
+
+            if not enabled:
+                self.lbl_telemetry_keyclack.set_markup("• <b>Volume KeyClack:</b> Mengikuti volume bawaan laptop")
+                self.lbl_telemetry_status.set_markup("• <b>Status:</b> Kunci Volume Nonaktif (Volume keyboard akan naik/turun bersama laptop)")
+            elif is_muted:
+                self.lbl_telemetry_keyclack.set_markup("• <b>Volume KeyClack:</b> Hening (0%)")
+                self.lbl_telemetry_status.set_markup("• <b>Status:</b> Laptop di-mute")
+            else:
+                calc = int(round((target * 100.0) / master_vol)) if master_vol > 0 else 0
+                calc = max(cfg.get("min_pct", 15), min(cfg.get("max_pct", 500), calc))
+                self.lbl_telemetry_keyclack.set_markup(
+                    f"• <b>Volume KeyClack:</b> {calc}% <i>(Otomatis disesuaikan real-time)</i>"
+                )
+                self.lbl_telemetry_status.set_markup(
+                    f"• <b>Hasil Suara Keyboard:</b> <span color='#16a34a' weight='bold'>TERKUNCI pada {target}%</span> "
+                    f"<i>(Daemon aktif: PID {pid})</i>"
+                )
+            return True
+
+        def on_restart_clicked(self, btn):
+            restart_keyclack()
+            self.show_dialog("KeyClack Dimuat Ulang", "KeyClack berhasil dimuat ulang dengan daftar suara terbaru.")
+
+        def show_dialog(self, title, message):
+            dialog = Gtk.MessageDialog(
+                parent=self,
+                flags=Gtk.DialogFlags.MODAL,
+                type=Gtk.MessageType.INFO,
+                buttons=Gtk.ButtonsType.OK,
+                message_format=title
+            )
+            dialog.format_secondary_text(message)
+            dialog.run()
+            dialog.destroy()
+
+    win = KeyClackManagerWindow(start_tab)
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
+    win.notebook.set_current_page(start_tab)
+    Gtk.main()
+
+
+def main():
+    if len(sys.argv) > 1:
+        arg = sys.argv[1].lower()
+        if arg in ["--help", "-h"]:
+            print("Penggunaan: keyclack-manager [perintah]")
+            print("Perintah:")
+            print("  gui                   Buka antarmuka grafis (default)")
+            print("  list                  Tampilkan soundpack yang terpasang")
+            print("  create <audio> <nama> Buat soundpack dari file audio")
+            print("  download <id> <nama>  Download pack dari Mechvibes")
+            print("  lock <10-100>         Atur target persentase kunci volume")
+            print("  refresh               Muat ulang cache dan KeyClack")
+            print("  open-folder           Buka folder soundpacks di file manager")
+            return
+        elif arg == "list":
+            packs = get_installed_packs()
+            print(f"Soundpacks terpasang ({len(packs)}):")
+            for slug, item in packs.items():
+                print(f"  • {item['name']} ({slug}) oleh {item['author']}")
+            return
+        elif arg == "refresh":
+            restart_keyclack()
+            print("KeyClack refreshed!")
+            return
+        elif arg == "open-folder":
+            subprocess.Popen(["xdg-open", SOUNDPACKS_DIR])
+            return
+        elif arg == "create" and len(sys.argv) >= 4:
+            audio = sys.argv[2]
+            name = sys.argv[3]
+            create_soundpack_from_audio(audio, name)
+            print(f"Soundpack '{name}' berhasil dibuat!")
+            return
+        elif arg == "lock" and len(sys.argv) >= 3:
+            keyclack_autovol.main()
+            return
+        elif arg == "--tab=create":
+            run_gui(start_tab=1)
+            return
+        elif arg == "--tab=installed":
+            run_gui(start_tab=2)
+            return
+        elif arg == "--tab=volume":
+            run_gui(start_tab=3)
+            return
+
+    run_gui(start_tab=0)
+
+if __name__ == "__main__":
+    main()

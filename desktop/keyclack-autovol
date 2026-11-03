@@ -1,0 +1,273 @@
+#!/usr/bin/env python3
+"""
+KeyClack Auto-Volume Calibrator Daemon
+Locks the perceived acoustic loudness of KeyClack keyboard clicks.
+When laptop master volume changes (via Fn keys, slider, applet), KeyClack's stream
+volume is inversely adjusted in real-time (~1ms) so keyboard loudness remains constant.
+"""
+
+import os
+import sys
+import json
+import time
+import subprocess
+import signal
+import re
+
+CONFIG_FILE = os.path.expanduser("~/.local/share/mechvibes/data/volume_lock.json")
+PID_FILE = "/tmp/keyclack-autovol.pid"
+
+DEFAULT_CONFIG = {
+    "enabled": True,
+    "target_loudness_pct": 60,  # Desired constant acoustic loudness (10% - 100%)
+    "min_pct": 15,              # Minimum allowed volume percentage
+    "max_pct": 500              # Maximum allowed volume percentage
+}
+
+def load_config():
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE, "r") as f:
+                cfg = json.load(f)
+                return {**DEFAULT_CONFIG, **cfg}
+        except Exception:
+            pass
+    return DEFAULT_CONFIG.copy()
+
+def save_config(cfg):
+    os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(cfg, f, indent=2)
+
+def get_master_sink_info():
+    """Returns (volume_percent_int, is_muted)"""
+    try:
+        res = subprocess.run(
+            ["pactl", "-f", "json", "list", "sinks"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=2
+        )
+        data = json.loads(res.stdout)
+        # Find default or running sink
+        for sink in data:
+            vol_str = sink.get("volume", {}).get("front-left", {}).get("value_percent", "50%")
+            m = re.search(r"(\d+)%", vol_str)
+            vol = int(m.group(1)) if m else 50
+            mute = sink.get("mute", False)
+            return vol, mute
+    except Exception:
+        pass
+    return 50, False
+
+def get_keyclack_sink_inputs():
+    """Returns list of sink input indices for KeyClack/Mechvibes"""
+    try:
+        res = subprocess.run(
+            ["pactl", "-f", "json", "list", "sink-inputs"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=2
+        )
+        data = json.loads(res.stdout)
+        inputs = []
+        for item in data:
+            props = item.get("properties", {})
+            app_name = props.get("application.name", "").lower()
+            node_name = props.get("node.name", "").lower()
+            dev_desc = props.get("device.description", "").lower()
+            if "mechvibes" in app_name or "mechvibes" in node_name or "mechvibes" in dev_desc:
+                inputs.append(item["index"])
+        return inputs
+    except Exception:
+        return []
+
+def apply_calibration(config, last_applied=None):
+    if not config.get("enabled", True):
+        return last_applied
+
+    master_vol, is_muted = get_master_sink_info()
+    target = config.get("target_loudness_pct", 60)
+    min_pct = config.get("min_pct", 15)
+    max_pct = config.get("max_pct", 500)
+
+    if master_vol <= 0:
+        calculated_vol = 0
+    else:
+        # Inverse formula: Target / (Master / 100) = Target * 100 / Master
+        calculated_vol = int(round((target * 100.0) / master_vol))
+        calculated_vol = max(min_pct, min(max_pct, calculated_vol))
+
+    if last_applied == (calculated_vol, is_muted):
+        return last_applied
+
+    inputs = get_keyclack_sink_inputs()
+    if inputs:
+        for idx in inputs:
+            vol_arg = f"{calculated_vol}%"
+            subprocess.run(
+                ["pactl", "set-sink-input-volume", str(idx), vol_arg],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            if is_muted:
+                subprocess.run(
+                    ["pactl", "set-sink-input-mute", str(idx), "1"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
+            else:
+                subprocess.run(
+                    ["pactl", "set-sink-input-mute", str(idx), "0"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
+
+    return (calculated_vol, is_muted)
+
+def run_loop():
+    # Save PID
+    with open(PID_FILE, "w") as f:
+        f.write(str(os.getpid()))
+
+    def cleanup(signum, frame):
+        try:
+            if os.path.exists(PID_FILE):
+                os.remove(PID_FILE)
+        except Exception:
+            pass
+        sys.exit(0)
+
+    signal.signal(signal.SIGTERM, cleanup)
+    signal.signal(signal.SIGINT, cleanup)
+
+    config = load_config()
+    last_applied = None
+
+    # Initial calibration
+    last_applied = apply_calibration(config, last_applied)
+
+    # Subscribe to PipeWire / PulseAudio events
+    while True:
+        try:
+            proc = subprocess.Popen(
+                ["pactl", "subscribe"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True
+            )
+            for line in proc.stdout:
+                # ONLY react to sink or server events, NEVER sink-input events to prevent loops
+                if ("'change' on sink" in line and "sink-input" not in line) or ("'new' on sink-input" in line):
+                    config = load_config()
+                    last_applied = apply_calibration(config, last_applied)
+        except Exception as e:
+            time.sleep(1)
+
+def is_running():
+    if os.path.exists(PID_FILE):
+        try:
+            with open(PID_FILE, "r") as f:
+                pid = int(f.read().strip())
+            os.kill(pid, 0)
+            return pid
+        except Exception:
+            try:
+                os.remove(PID_FILE)
+            except Exception:
+                pass
+    return None
+
+def start_daemon():
+    pid = is_running()
+    if pid:
+        print(f"KeyClack Auto-Volume sudah berjalan (PID: {pid}).")
+        return
+    subprocess.Popen(
+        [sys.executable, os.path.abspath(__file__), "run"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True
+    )
+    time.sleep(0.3)
+    new_pid = is_running()
+    print(f"KeyClack Auto-Volume berhasil dimulai (PID: {new_pid}).")
+
+def stop_daemon():
+    pid = is_running()
+    if pid:
+        try:
+            os.kill(pid, signal.SIGTERM)
+            print(f"KeyClack Auto-Volume dihentikan (PID: {pid}).")
+        except Exception as e:
+            print(f"Gagal menghentikan PID {pid}: {e}")
+        try:
+            if os.path.exists(PID_FILE):
+                os.remove(PID_FILE)
+        except Exception:
+            pass
+    else:
+        print("KeyClack Auto-Volume tidak sedang berjalan.")
+
+def print_status():
+    pid = is_running()
+    cfg = load_config()
+    master_vol, is_muted = get_master_sink_info()
+    inputs = get_keyclack_sink_inputs()
+
+    print("=== Status Kunci Volume KeyClack ===")
+    print(f"Status Daemon      : {'Aktif (PID ' + str(pid) + ')' if pid else 'Mati (Tidak aktif)'}")
+    print(f"Fitur Kunci Volume : {'AKTIF (Auto-Calibrate)' if cfg.get('enabled') else 'NONAKTIF'}")
+    print(f"Target Kenyaringan : {cfg.get('target_loudness_pct')}% (Akustik Konstan)")
+    print(f"Volume Master Laptop: {master_vol}% {'(MUTED)' if is_muted else ''}")
+
+    if master_vol > 0:
+        calc = int(round((cfg.get('target_loudness_pct') * 100.0) / master_vol))
+        calc = max(cfg.get('min_pct'), min(cfg.get('max_pct'), calc))
+        print(f"Kalibrasi KeyClack : {calc}% (Dihitung otomatis)")
+    else:
+        print(f"Kalibrasi KeyClack : 0% (Laptop Muted)")
+
+    print(f"Sink Input KeyClack: {inputs if inputs else 'Tidak terdeteksi (KeyClack mungkin belum terbuka)'}")
+
+def main():
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "run":
+            run_loop()
+            return
+        elif cmd == "start":
+            start_daemon()
+            return
+        elif cmd == "stop":
+            stop_daemon()
+            return
+        elif cmd == "status":
+            print_status()
+            return
+        elif cmd == "set" and len(sys.argv) >= 3:
+            try:
+                val = int(sys.argv[2])
+                cfg = load_config()
+                cfg["target_loudness_pct"] = max(10, min(100, val))
+                cfg["enabled"] = True
+                save_config(cfg)
+                apply_calibration(cfg)
+                print(f"Target kenyaringan berhasil diatur ke {cfg['target_loudness_pct']}%.")
+            except ValueError:
+                print("Nilai harus berupa angka (10-100).")
+            return
+        elif cmd == "toggle":
+            cfg = load_config()
+            cfg["enabled"] = not cfg.get("enabled", True)
+            save_config(cfg)
+            apply_calibration(cfg)
+            print(f"Kunci Volume sekarang: {'AKTIF' if cfg['enabled'] else 'NONAKTIF'}")
+            return
+
+    print("Penggunaan: keyclack-autovol [start|stop|status|set <10-100>|toggle]")
+
+if __name__ == "__main__":
+    main()
