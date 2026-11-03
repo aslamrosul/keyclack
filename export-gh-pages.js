@@ -58,14 +58,17 @@ function buildPages(isGhPages = false) {
     let fullHtml = renderLayout({
       title: p.title,
       activeNav: p.nav,
-      body: p.html
+      body: p.html,
+      prefix: prefix
     });
 
     if (isGhPages) {
       // Fix links and asset paths for GitHub Pages subpath /keyclack/
-      fullHtml = fullHtml.replace(/href="\/(download|sound-packs|themes|guides|blog|privacy|terms|login|favicon|logo)/g, `href="${prefix}/$1`);
-      fullHtml = fullHtml.replace(/href="\/(css)/g, `href="${prefix}/$1`);
+      fullHtml = fullHtml.replace(/href="\/(download|sound-packs|themes|guides|blog|privacy|terms|login|favicon|logo|apple-icon)/g, `href="${prefix}/$1`);
+      fullHtml = fullHtml.replace(/href="\/"/g, `href="${prefix}/"`);
+      fullHtml = fullHtml.replace(/href="\/css/g, `href="${prefix}/css`);
       fullHtml = fullHtml.replace(/src="\/(css|media|screens|logo|icon|apple-icon|soundpacks|mood|blog)/g, `src="${prefix}/$1`);
+      fullHtml = fullHtml.replace(/content="\/(screens|logo|icon)/g, `content="${prefix}/$1`);
       fullHtml = fullHtml.replace(/'\/(soundpacks|screens|mood)\//g, `'${prefix}/$1/`);
     }
 

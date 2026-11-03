@@ -1,4 +1,5 @@
-function renderLayout({ title, description, activeNav = '', body, extraHead = '', extraScript = '' }) {
+function renderLayout({ title, description, activeNav = '', body, extraHead = '', extraScript = '', prefix = '' }) {
+  const homeUrl = prefix ? prefix + '/' : '/';
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -8,11 +9,32 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
   <meta name="description" content="${description || 'Authentic mechanical keyboard acoustics as you type. Add tactile auditory feedback to every keystroke with KeyClack. Zero latency, rich sound library, and theme customization.'}"/>
   <meta property="og:title" content="${title || 'KeyClack - Authentic Mechanical Keyboard Acoustics'}"/>
   <meta property="og:description" content="${description || 'Authentic mechanical keyboard acoustics as you type with KeyClack.'}"/>
-  <meta property="og:image" content="/screens/ss1.png"/>
-  <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon"/>
-  <link rel="apple-touch-icon" href="/apple-icon.png"/>
-  <link rel="stylesheet" href="/css/main.css"/>
-  <link rel="stylesheet" href="/css/theme.css"/>
+  <meta property="og:image" content="${prefix}/screens/ss1.png"/>
+  <link rel="icon" href="${prefix}/favicon.ico" sizes="48x48" type="image/x-icon"/>
+  <link rel="apple-touch-icon" href="${prefix}/apple-icon.png"/>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#ec4899',
+            accent: '#14b8a6',
+            neutral: '#1e1f26',
+            'base-100': '#121316',
+            'base-200': '#18191e',
+            'base-300': '#24262f',
+            'base-content': '#f4f4f5',
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="${prefix}/css/main.css"/>
+  <link rel="stylesheet" href="${prefix}/css/theme.css"/>
   <style>
     /* Smooth interactive typography & ambient highlights */
     body {
@@ -41,18 +63,18 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
   <header class="sticky top-4 z-50 w-full px-4">
     <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
       <div class="flex shrink-0 items-center">
-        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
-          <img alt="KeyClack Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="/logo.svg"/>
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="${homeUrl}">
+          <img alt="" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="${prefix}/logo.svg"/>
           <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">KeyClack</span>
         </a>
       </div>
 
       <div class="hidden md:flex items-center space-x-1">
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'download' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/download">Download</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'sound-packs' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/sound-packs">Sound Library</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'themes' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/themes">Themes</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'guides' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/guides">Guides</a>
-        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'blog' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="/blog">Blog</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'download' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="${prefix}/download">Download</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'sound-packs' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="${prefix}/sound-packs">Sound Library</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'themes' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="${prefix}/themes">Themes</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'guides' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="${prefix}/guides">Guides</a>
+        <a class="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-neutral/10 ${activeNav === 'blog' ? 'text-primary font-semibold' : 'text-base-content/80 hover:text-base-content'}" href="${prefix}/blog">Blog</a>
       </div>
 
       <div class="flex items-center gap-2">
@@ -62,7 +84,7 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
           <span id="audioToggleLabel">Sound: ON</span>
         </button>
 
-        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="/login">Sign In</a>
+        <a class="btn btn-sm btn-neutral rounded-box hidden sm:inline-flex" href="${prefix}/login">Sign In</a>
 
         <!-- Mobile Drawer Toggle -->
         <button type="button" class="btn btn-circle btn-sm btn-ghost md:hidden" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
@@ -73,13 +95,13 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
 
     <!-- Mobile Menu dropdown -->
     <div id="mobileMenu" class="hidden md:hidden mx-auto max-w-5xl mt-2 p-4 bg-base-200/95 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl flex flex-col gap-2">
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/download">Download</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/sound-packs">Sound Pack Library</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/themes">Themes Gallery</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/guides">User Guides</a>
-      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="/blog">Blog</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="${prefix}/download">Download</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="${prefix}/sound-packs">Sound Pack Library</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="${prefix}/themes">Themes Gallery</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="${prefix}/guides">User Guides</a>
+      <a class="p-2 rounded-lg text-sm font-medium hover:bg-base-300" href="${prefix}/blog">Blog</a>
       <div class="divider my-1"></div>
-      <a class="btn btn-sm btn-neutral w-full" href="/login">Sign In</a>
+      <a class="btn btn-sm btn-neutral w-full" href="${prefix}/login">Sign In</a>
     </div>
   </header>
 
@@ -93,7 +115,7 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
     <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
       <div class="col-span-2 space-y-4">
         <div class="flex items-center space-x-2.5">
-          <img src="/logo.svg" alt="KeyClack" class="h-7 w-7"/>
+          <img src="${prefix}/logo.svg" alt="KeyClack" class="h-7 w-7"/>
           <span class="font-bold text-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">KeyClack</span>
         </div>
         <p class="text-sm text-base-content/60 max-w-sm">
@@ -111,18 +133,18 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Product</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/download" class="hover:text-primary transition-colors">Download App</a></li>
-          <li><a href="/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
-          <li><a href="/themes" class="hover:text-primary transition-colors">Themes Gallery</a></li>
+          <li><a href="${prefix}/download" class="hover:text-primary transition-colors">Download App</a></li>
+          <li><a href="${prefix}/sound-packs" class="hover:text-primary transition-colors">Sound Packs</a></li>
+          <li><a href="${prefix}/themes" class="hover:text-primary transition-colors">Themes Gallery</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-semibold text-sm mb-3 text-base-content">Resources</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
-          <li><a href="/guides" class="hover:text-primary transition-colors">User Guides</a></li>
-          <li><a href="/blog" class="hover:text-primary transition-colors">Articles & Blog</a></li>
-          <li><a href="/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
+          <li><a href="${prefix}/guides" class="hover:text-primary transition-colors">User Guides</a></li>
+          <li><a href="${prefix}/blog" class="hover:text-primary transition-colors">Articles & Blog</a></li>
+          <li><a href="${prefix}/blog/is-mechvibes-safe" class="hover:text-primary transition-colors">Security & Privacy</a></li>
           <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Repository</a></li>
         </ul>
       </div>
@@ -131,8 +153,8 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
         <h4 class="font-semibold text-sm mb-3 text-base-content">Community & Legal</h4>
         <ul class="space-y-2 text-sm text-base-content/70">
           <li><a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-primary transition-colors">GitHub Source</a></li>
-          <li><a href="/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-          <li><a href="/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
+          <li><a href="${prefix}/privacy" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="${prefix}/terms" class="hover:text-primary transition-colors">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -141,7 +163,7 @@ function renderLayout({ title, description, activeNav = '', body, extraHead = ''
       <p>© ${new Date().getFullYear()} KeyClack. Crafted with open-source love for typists worldwide.</p>
       <div class="flex items-center gap-4">
         <a href="https://github.com/aslamrosul/keyclack" target="_blank" class="hover:text-base-content">GitHub (aslamrosul/keyclack)</a>
-        <a href="/download" class="hover:text-base-content">Releases</a>
+        <a href="${prefix}/download" class="hover:text-base-content">Releases</a>
       </div>
     </div>
   </footer>

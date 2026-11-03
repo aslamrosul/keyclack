@@ -7,9 +7,30 @@
   <meta name="description" content="Authentic mechanical keyboard acoustics as you type. Add tactile auditory feedback to every keystroke with KeyClack. Zero latency, rich sound library, and theme customization."/>
   <meta property="og:title" content="KeyClack Blog & News"/>
   <meta property="og:description" content="Authentic mechanical keyboard acoustics as you type with KeyClack."/>
-  <meta property="og:image" content="/screens/ss1.png"/>
+  <meta property="og:image" content="/keyclack/screens/ss1.png"/>
   <link rel="icon" href="/keyclack/favicon.ico" sizes="48x48" type="image/x-icon"/>
-  <link rel="apple-touch-icon" href="/apple-icon.png"/>
+  <link rel="apple-touch-icon" href="/keyclack/apple-icon.png"/>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#ec4899',
+            accent: '#14b8a6',
+            neutral: '#1e1f26',
+            'base-100': '#121316',
+            'base-200': '#18191e',
+            'base-300': '#24262f',
+            'base-content': '#f4f4f5',
+          }
+        }
+      }
+    };
+  </script>
   <link rel="stylesheet" href="/keyclack/css/main.css"/>
   <link rel="stylesheet" href="/keyclack/css/theme.css"/>
   <style>
@@ -40,8 +61,8 @@
   <header class="sticky top-4 z-50 w-full px-4">
     <nav class="mx-auto max-w-5xl rounded-full border border-base-300 bg-base-200/80 backdrop-blur-md transition-all duration-300 shadow-lg px-6 h-14 flex items-center justify-between">
       <div class="flex shrink-0 items-center">
-        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/">
-          <img alt="KeyClack Logo" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="/keyclack/logo.svg"/>
+        <a class="flex items-center space-x-2.5 whitespace-nowrap" href="/keyclack/">
+          <img alt="" width="32" height="32" class="h-8 w-8 transition-transform hover:scale-110 duration-300" src="/keyclack/logo.svg"/>
           <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">KeyClack</span>
         </a>
       </div>
